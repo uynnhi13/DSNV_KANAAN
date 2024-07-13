@@ -25,97 +25,15 @@ namespace DSNV_KANAAN
         SqlCommand thuchien;
         SqlDataReader docdulieu;
         int i = 0;
-        Dictionary<int, string> Department = new Dictionary<int, string>();
-        Dictionary<int,string> Jobtitle=new Dictionary<int, string>();
+        DataTable dtCV=new DataTable();
+        DataTable dtBP=new DataTable();
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
             HienThi();
             LoadThongTin();
         }
-
-        public void ExportExcel(ListView lstView, string sheetName, string title)
-        {
-            //TẠO CÁC ĐỐI TƯỢNG EXCEL
-            Microsoft.Office.Interop.Excel.Application oExcel = new Microsoft.Office.Interop.Excel.Application();
-            Microsoft.Office.Interop.Excel.Sheets oSheets;
-            Microsoft.Office.Interop.Excel.Workbooks oBooks;
-            Microsoft.Office.Interop.Excel.Worksheet oSheet;
-            Microsoft.Office.Interop.Excel.Workbook oBook;
-
-            //TẠO MỚI MỘT EXCEL WORKBOOK
-            oExcel.Visible = true;
-            oExcel.DisplayAlerts = false;
-            oExcel.Application.SheetsInNewWorkbook = 1;
-            oBooks = oExcel.Workbooks;
-            oBook = (Microsoft.Office.Interop.Excel.Workbook)(oExcel.Workbooks.Add(Type.Missing));
-            oSheets = oBook.Worksheets;
-            oSheet = (Microsoft.Office.Interop.Excel.Worksheet)oSheets.get_Item(1);
-            oSheet.Name = sheetName;
-
-            //TẠO PHẦN TIÊU ĐỀ
-            Microsoft.Office.Interop.Excel.Range head = oSheet.get_Range("A1", "G1");
-            head.MergeCells = true;
-            head.Value2 = title;
-            head.Font.Bold = true;
-            head.Font.Name = "Times New Roman";
-            head.Font.Size = "20";
-            head.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
-
-            //TẠO TIÊU ĐỀ CỘT
-            //Microsoft.Office.Interop.Excel.Range c11 = oSheet.get_Range("A3", "A3");
-            //c11.Value2 = "Mã Nhân Viên";
-            //c11.ColumnWidth = 12;
-
-            //Microsoft.Office.Interop.Excel.Range c12 = oSheet.get_Range("B3", "B3");
-            //c12.Value2 = "Họ tên";
-            //c12.ColumnWidth = 25.0;
-
-            //Microsoft.Office.Interop.Excel.Range c13 = oSheet.get_Range("C3", "C3");
-            //c13.Value2 = "Ngày Sinh";
-            //c13.ColumnWidth = 25;
-
-            for(int i = 0; i < lstThongTin.Columns.Count; i++)
-            {
-                Microsoft.Office.Interop.Excel.Range col = oSheet.get_Range((char)('A' + i) + "3", Type.Missing);
-                col.Value2 = lstView.Columns[i].Text;
-                col.ColumnWidth = lstView.Columns[i].Width / 10;
-                col.Font.Bold = true;
-                col.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-            }
-
-            //TẠO MẢNG THEO DATABASE
-            object[,] arr = new object[lstView.Items.Count,lstView.Columns.Count]; 
-
-            //CHUYỂN DỮ LIỆU TỪ DB VÀO MẢNG ĐỐI TƯỢNG
-            for(int item=0; item < lstView.Items.Count; item++)
-            {
-                ListViewItem listViewItem = lstView.Items[item];
-
-                for(int col=0;col<lstView.Columns.Count;col++)
-                {
-                    arr[item, col] = "'"+listViewItem.SubItems[col].Text;
-                }
-            }
-
-            //THIẾT LẬP VÙNG ĐIỀN DỮ LIỆU
-            int rowStart = 4;
-            int columnStart = 1;
-            int rowEnd = rowStart + lstView.Items.Count - 1;
-            int columnEnd = lstView.Columns.Count;
-
-            //Ô BẮT ĐẦU ĐIỀN DỮ LIỆU
-            Microsoft.Office.Interop.Excel.Range c1 = (Microsoft.Office.Interop.Excel.Range)oSheet.Cells[rowStart, columnStart];
-            //Ô KẾT THÚC ĐIỀN DỮ LIỆU
-            Microsoft.Office.Interop.Excel.Range c2=(Microsoft.Office.Interop.Excel.Range)oSheet.Cells[rowEnd, columnEnd];
-
-            //LẤY VỀ VÙNG DỮ LIỆU
-            Microsoft.Office.Interop.Excel.Range range = oSheet.get_Range(c1, c2);
-            //ĐIỀN DỮ LIỆU VÀO VÙNG ĐÃ THIẾT LẬP
-            range.Value2 = arr;
-            oSheet.get_Range(c1, c2).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-        }
-
 
         public void HienThi()
         {
@@ -154,13 +72,15 @@ namespace DSNV_KANAAN
 
                 i++;
             }
+            lstThongTin.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            lstThongTin.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
             ketnoi.Close();
         }
 
         private void LoadThongTin()
         {
-            Function.LoadComboBox(Jobtitle, cbChucVu, "Jobtitle_tab");
-            Function.LoadComboBox(Department, cbBoPhan, "Department_tab");
+            Function.Load(dtCV, cbChucVu, "Jobtitle_tab");
+            Function.Load(dtBP, cbBoPhan, "Department_tab");
         }
 
 
@@ -221,15 +141,16 @@ namespace DSNV_KANAAN
             cbBoPhan.Text = lstThongTin.SelectedItems[0].SubItems[4].Text;
             cbLoaiHD.Text = lstThongTin.SelectedItems[0].SubItems[3].Text;
             cbChucVu.Text = lstThongTin.SelectedItems[0].SubItems[5].Text;
-
+            lstThongTin.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            lstThongTin.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
 
         private void btSua_Click(object sender, EventArgs e)
         {
             lstThongTin.Items.Clear();
             ketnoi.Open();
-            int departmentID = Function.GetId(Department, cbBoPhan.Text);
-            int jobtitleID=Function.GetId(Jobtitle,cbChucVu.Text);
+            int departmentID = Function.GetId(dtBP, cbBoPhan.Text);
+            int jobtitleID=Function.GetId(dtCV,cbChucVu.Text);
             DateTime birthdayString = dtNgaySinh.Value.Date;
             sql = @"update Employee_tab
                 set Full_name=@Fullname, 
@@ -368,7 +289,68 @@ namespace DSNV_KANAAN
         private void btexportE_Click(object sender, EventArgs e)
         {
             // Xuất dữ liệu ra Excel
-            ExportExcel(lstThongTin, "Danh Sách", "Danh Sách Nhân Viên");
+            Function.ExportExcel(lstThongTin, "Danh Sách Nhân Viên", "Danh Sách Nhân Viên");
+        }
+
+        private void btImport_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog op = new OpenFileDialog();
+            op.Filter = "Excel Sheet (*.xlsx)|*.xlsx|All Files (*.*)|*.*";
+
+            if (op.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = op.FileName;
+
+                // Gọi hàm ImportExcel để đọc dữ liệu từ file Excel vào DataTable
+                int coll = lstThongTin.Items.Count;
+                DataTable importedDataTable = Function.ImportExcel(filePath);
+
+                ketnoi.Open();
+                foreach (DataRow row in importedDataTable.Rows)
+                {
+                    SqlCommand thuchien = new SqlCommand("AddEmployeeData", ketnoi);
+                    thuchien.CommandType = CommandType.StoredProcedure;
+                    using (thuchien)
+                    {
+                        try
+                        {
+                            thuchien.Parameters.AddWithValue("@Emp_code", "");
+                            thuchien.Parameters.AddWithValue("@Full_name", row[1]);
+                            thuchien.Parameters.AddWithValue("@Birthday", DateTime.ParseExact(row[2].ToString(), "dd/MM/yyyy", null));
+                            thuchien.Parameters.AddWithValue("@LoaiHD", row[3]);
+                            thuchien.Parameters.AddWithValue("@Department_id", 19);
+                            thuchien.Parameters.AddWithValue("@Jobtitle_id", 3);
+                            thuchien.Parameters.AddWithValue("@NgayNhanViec", DateTime.ParseExact(row[6].ToString(), "dd/MM/yyyy", null));
+                            thuchien.Parameters.AddWithValue("@NgayKyHopDong", DateTime.ParseExact(row[7].ToString(), "dd/MM/yyyy", null));
+                            thuchien.Parameters.AddWithValue("@NgayHetHan", DateTime.ParseExact(row[8].ToString(), "dd/MM/yyyy", null));
+                            thuchien.Parameters.AddWithValue("@ThangThamGiaBHXH", DateTime.ParseExact(row[9].ToString(), "dd/MM/yyyy", null));
+                            thuchien.Parameters.AddWithValue("@NoiSinh", row[10]);
+                            thuchien.Parameters.AddWithValue("@NguyenQuan", row[11]);
+                            thuchien.Parameters.AddWithValue("@CMND", row[12]);
+                            thuchien.Parameters.AddWithValue("@NgayCap", DateTime.ParseExact(row[13].ToString(), "dd/MM/yyyy", null));
+                            thuchien.Parameters.AddWithValue("@NoiCap", row[14]);
+                            thuchien.Parameters.AddWithValue("@DienThoai", row[15]);
+                            thuchien.Parameters.AddWithValue("@DiaChi", row[16]);
+                            thuchien.Parameters.AddWithValue("@GioiTinh", row[17]);
+                            thuchien.Parameters.AddWithValue("@MaSoThue", row[18]);
+                            thuchien.Parameters.AddWithValue("@SoTaiKhoan", row[19]);
+                            thuchien.Parameters.AddWithValue("@SoSoBHXH", row[20]);
+                            thuchien.Parameters.AddWithValue("@DanToc", 1);
+                            thuchien.Parameters.AddWithValue("@TonGiao", 1);
+                            thuchien.Parameters.AddWithValue("@TrinhDo", 1);
+
+                            thuchien.ExecuteNonQuery();
+                            
+                        }
+                        catch (Exception ex)
+                        {
+                            continue;
+                        }
+                    }
+                }
+
+                ketnoi.Close();
+            }
         }
     }
 }

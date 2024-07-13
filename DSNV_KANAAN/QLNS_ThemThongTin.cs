@@ -28,11 +28,12 @@ namespace DSNV_KANAAN
         SqlCommand thuchien;
         SqlDataReader docdulieu;
 
-        Dictionary<int, string> Department = new Dictionary<int, string>();
-        Dictionary<int, string> Jobtitle = new Dictionary<int, string>();
-        Dictionary<int, string> DanToc = new Dictionary<int, string>();
-        Dictionary<int, string> TonGiao = new Dictionary<int, string>();
-        Dictionary<int, string> TrinhDo = new Dictionary<int, string>();
+        DataTable dtDP = new DataTable();
+        DataTable dtCV = new DataTable();
+        DataTable dtDT = new DataTable();
+        DataTable dtTG = new DataTable();
+        DataTable dtTD = new DataTable();
+        DataTable dtDD = new DataTable();
 
         private void QLNS_ThemThongTin_Load(object sender, EventArgs e)
         {
@@ -95,24 +96,24 @@ namespace DSNV_KANAAN
 
         private void LoadThongTin()
         {
-            Function.LoadComboBox(Jobtitle, cbChucVu, "Jobtitle_tab");
-            Function.LoadComboBox(Department, cbBoPhan, "Department_tab");
-            Function.LoadComboBox(TonGiao, cbTonGiao, "TonGiao");
-            Function.LoadComboBox(DanToc, cbDanToc, "DanToc");
-            Function.LoadComboBox(TrinhDo, cbTrinhDo, "TrinhDoDaiHoc");
-            Function.LoadComboBoxButNoAdd(cbNguyenQuan, "DiaDiem");
-            Function.LoadComboBoxButNoAdd(cbNoiCap, "DiaDiem");
-            Function.LoadComboBoxButNoAdd(cbNoiSinh, "DiaDiem");
+            Function.Load(dtCV, cbChucVu, "Jobtitle_tab");
+            Function.Load(dtDP, cbBoPhan, "Department_tab");
+            Function.Load(dtTG, cbTonGiao, "TonGiao");
+            Function.Load(dtDT, cbDanToc, "DanToc");
+            Function.Load(dtTD, cbTrinhDo, "TrinhDoDaiHoc");
+            Function.Load(dtDD, cbNguyenQuan, "DiaDiem");
+            Function.Load(dtDD,cbNoiCap, "DiaDiem");
+            Function.Load(dtDD, cbNoiSinh, "DiaDiem");
         }
 
         private void btSave_Click(object sender, EventArgs e)
         {
             ketnoi.Open();
-            int Department_Id = Function.GetId(Department, cbBoPhan.Text);
-            int Jobtitle_Id = Function.GetId(Jobtitle, cbChucVu.Text);
-            int TonGiao_Id = Function.GetId(TonGiao, cbTonGiao.Text);
-            int DanToc_Id = Function.GetId(DanToc, cbDanToc.Text);
-            int TrinhDo_Id = Function.GetId(TrinhDo, cbTrinhDo.Text);
+            int Department_Id = Function.GetId(dtDP, cbBoPhan.Text);
+            int Jobtitle_Id = Function.GetId(dtCV, cbChucVu.Text);
+            int TonGiao_Id = Function.GetId(dtTG, cbTonGiao.Text);
+            int DanToc_Id = Function.GetId(dtDT, cbDanToc.Text);
+            int TrinhDo_Id = Function.GetId(dtTD, cbTrinhDo.Text);
             String MaNV;
 
             if (status == true)

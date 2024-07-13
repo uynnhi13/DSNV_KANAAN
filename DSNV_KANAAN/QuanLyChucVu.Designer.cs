@@ -30,10 +30,10 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.tbTenCV = new System.Windows.Forms.TextBox();
             this.lbMaCV = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.tbTenCV = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cblstCV = new System.Windows.Forms.ComboBox();
             this.lstThongTinKH = new System.Windows.Forms.ListView();
@@ -50,6 +50,8 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btImport = new System.Windows.Forms.Button();
+            this.btExport = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -69,10 +71,10 @@
             // groupBox1
             // 
             this.groupBox1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.groupBox1.Controls.Add(this.tbTenCV);
             this.groupBox1.Controls.Add(this.lbMaCV);
-            this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.tbTenCV);
+            this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(261, 94);
             this.groupBox1.Name = "groupBox1";
@@ -80,43 +82,47 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông Tin Chức Vụ";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // lbMaCV
+            // 
+            this.lbMaCV.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lbMaCV.AutoSize = true;
+            this.lbMaCV.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbMaCV.Location = new System.Drawing.Point(202, 46);
+            this.lbMaCV.Name = "lbMaCV";
+            this.lbMaCV.Size = new System.Drawing.Size(28, 28);
+            this.lbMaCV.TabIndex = 12;
+            this.lbMaCV.Text = "__";
+            // 
+            // label2
+            // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(30, 46);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(126, 28);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "Mã Chức Vụ";
             // 
             // tbTenCV
             // 
             this.tbTenCV.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbTenCV.Location = new System.Drawing.Point(203, 83);
+            this.tbTenCV.Location = new System.Drawing.Point(207, 90);
             this.tbTenCV.Name = "tbTenCV";
             this.tbTenCV.Size = new System.Drawing.Size(333, 34);
             this.tbTenCV.TabIndex = 10;
-            // 
-            // lbMaCV
-            // 
-            this.lbMaCV.AutoSize = true;
-            this.lbMaCV.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbMaCV.Location = new System.Drawing.Point(198, 40);
-            this.lbMaCV.Name = "lbMaCV";
-            this.lbMaCV.Size = new System.Drawing.Size(0, 28);
-            this.lbMaCV.TabIndex = 5;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(34, 86);
+            this.label3.Location = new System.Drawing.Point(30, 96);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(129, 28);
             this.label3.TabIndex = 4;
             this.label3.Text = "Tên Chức Vụ";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(34, 40);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(126, 28);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Mã Chức Vụ";
             // 
             // groupBox2
             // 
@@ -237,7 +243,7 @@
             this.lstThongTinCV.HideSelection = false;
             this.lstThongTinCV.Location = new System.Drawing.Point(46, 35);
             this.lstThongTinCV.Name = "lstThongTinCV";
-            this.lstThongTinCV.Size = new System.Drawing.Size(483, 192);
+            this.lstThongTinCV.Size = new System.Drawing.Size(483, 167);
             this.lstThongTinCV.TabIndex = 13;
             this.lstThongTinCV.UseCompatibleStateImageBehavior = false;
             this.lstThongTinCV.View = System.Windows.Forms.View.Details;
@@ -246,7 +252,6 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "Mã Chức Vụ";
-            this.columnHeader1.Width = 80;
             // 
             // columnHeader2
             // 
@@ -256,6 +261,8 @@
             // groupBox3
             // 
             this.groupBox3.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.groupBox3.Controls.Add(this.btExport);
+            this.groupBox3.Controls.Add(this.btImport);
             this.groupBox3.Controls.Add(this.lstThongTinCV);
             this.groupBox3.Location = new System.Drawing.Point(259, 343);
             this.groupBox3.Name = "groupBox3";
@@ -263,6 +270,30 @@
             this.groupBox3.TabIndex = 14;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Danh Sách Chức Vụ";
+            // 
+            // btImport
+            // 
+            this.btImport.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btImport.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btImport.Location = new System.Drawing.Point(237, 218);
+            this.btImport.Name = "btImport";
+            this.btImport.Size = new System.Drawing.Size(133, 23);
+            this.btImport.TabIndex = 14;
+            this.btImport.Text = "Nhập File Excel";
+            this.btImport.UseVisualStyleBackColor = true;
+            this.btImport.Click += new System.EventHandler(this.btImport_Click);
+            // 
+            // btExport
+            // 
+            this.btExport.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btExport.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btExport.Location = new System.Drawing.Point(403, 218);
+            this.btExport.Name = "btExport";
+            this.btExport.Size = new System.Drawing.Size(126, 23);
+            this.btExport.TabIndex = 15;
+            this.btExport.Text = "Xuất File Excel";
+            this.btExport.UseVisualStyleBackColor = true;
+            this.btExport.Click += new System.EventHandler(this.btExport_Click);
             // 
             // QuanLyChucVu
             // 
@@ -295,8 +326,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label lbMaCV;
         private System.Windows.Forms.Button btSearch;
         private System.Windows.Forms.TextBox tbTenCV;
         private System.Windows.Forms.Button btAdd;
@@ -310,8 +339,12 @@
         private System.Windows.Forms.ColumnHeader columnHeader7;
         private System.Windows.Forms.ComboBox cblstCV;
         private System.Windows.Forms.ListView lstThongTinCV;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label lbMaCV;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.Button btExport;
+        private System.Windows.Forms.Button btImport;
     }
 }

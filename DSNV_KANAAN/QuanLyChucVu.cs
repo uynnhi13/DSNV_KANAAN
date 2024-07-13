@@ -24,12 +24,12 @@ namespace DSNV_KANAAN
         SqlDataReader docdulieu;
         string sql;
         int i = 0;
-        Dictionary<int, string> Jobtitle = new Dictionary<int, string>();
+        DataTable dtCV=new DataTable();
 
         private void QuanLyChucVu_Load(object sender, EventArgs e)
         {
             HienThiThongTinChucVu();
-            Function.LoadComboBox(Jobtitle, cblstCV, "Jobtitle_tab");
+            Function.Load(dtCV, cblstCV, "Jobtitle_tab");
         }
 
         private void HienThiThongTinChucVu()
@@ -70,27 +70,49 @@ namespace DSNV_KANAAN
 
         private void btDelete_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(lbMaCV.Text))
+            try
             {
-                ketnoi.Open();
-                sql = @"DELETE FROM Jobtitle_tab 
-                WHERE Jobtitle_id=@Jobtitle_id";
-                using (thuchien = new SqlCommand(sql, ketnoi))
+                if (!string.IsNullOrEmpty(lbMaCV.Text))
                 {
-                    thuchien.Parameters.AddWithValue("@Jobtitle_id", lbMaCV.Text);
+                    ketnoi.Open();
+                    thuchien = new SqlCommand("DeleteJobtitle", ketnoi);
+                    thuchien.CommandType=CommandType.StoredProcedure;
+                    using (thuchien)
+                    {
+                        thuchien.Parameters.AddWithValue("@Jobtitle_id", lbMaCV.Text);
 
-                    thuchien.ExecuteNonQuery();
+                        thuchien.ExecuteNonQuery();
+                    }
+                    MessageBox.Show("Bạn đã xóa thành công chức vụ " + tbTenCV.Text);
                 }
-
-                ketnoi.Close();
-                MessageBox.Show("Bạn đã xóa thành công chức vụ " + tbTenCV.Text);
-                HienThiThongTinChucVu();
+                else
+                {
+                    MessageBox.Show("Không thể xóa chức vụ này");
+                }
+                
             }
-            else
+            catch(SqlException ex)
             {
-                MessageBox.Show("Không thể xóa chức vụ này");
+                DialogResult dgR=MessageBox.Show(ex.Message,"Cảnh báo",MessageBoxButtons.YesNo,MessageBoxIcon.Warning);
+                if(dgR==DialogResult.Yes)
+                {
+                    thuchien = new SqlCommand("DeleteEmpByJobtitle", ketnoi);
+                    thuchien.CommandType = CommandType.StoredProcedure;
+                    using (thuchien)
+                    {
+                        thuchien.Parameters.AddWithValue("@Jobtitle_id", lbMaCV.Text);
+
+                        thuchien.ExecuteNonQuery();
+                    }
+                    MessageBox.Show("Bạn đã xóa thành công chức vụ " + tbTenCV.Text);
+                }
             }
-            Refresh();
+            finally
+            {
+                HienThiThongTinChucVu();
+                ketnoi.Close();
+                Refresh();
+            }
         }
 
         private void btUpdate_Click(object sender, EventArgs e)
@@ -118,7 +140,7 @@ namespace DSNV_KANAAN
         private void btSearch_Click(object sender, EventArgs e)
         {
             lstThongTinKH.Items.Clear();
-            int id = Function.GetId(Jobtitle, cblstCV.Text);
+            int id = Function.GetId(dtCV, cblstCV.Text);
 
             ketnoi.Open();
             thuchien = new SqlCommand("GetDetailsKHByCV", ketnoi);
@@ -131,7 +153,7 @@ namespace DSNV_KANAAN
             {
                 lstThongTinKH.Items.Add(docdulieu[0].ToString());
                 lstThongTinKH.Items[i].SubItems.Add(docdulieu["Jobtitle_Name"].ToString());
-                lstThongTinKH.Items[i].SubItems.Add(docdulieu["Employee_id"].ToString());
+                lstThongTinKH.Items[i].SubItems.Add(docdulieu["Emp_code"].ToString());
                 lstThongTinKH.Items[i].SubItems.Add(docdulieu["Full_Name"].ToString());
                 lstThongTinKH.Items[i].SubItems.Add(docdulieu["Department_Name"].ToString());
 
@@ -155,6 +177,22 @@ namespace DSNV_KANAAN
                 lbMaCV.Text = lstThongTinCV.SelectedItems[0].SubItems[0].Text;
                 tbTenCV.Text = lstThongTinCV.SelectedItems[0].SubItems[1].Text;
             }
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btExport_Click(object sender, EventArgs e)
+        {
+            Function.ExportExcel(lstThongTinCV, "Danh Sách Chức Vụ", "Danh Sách Chức Vụ");
+        }
+
+        private void btImport_Click(object sender, EventArgs e)
+        {
+            Function.ImportExcelBPvaCV("AddJobtitle");
+            HienThiThongTinChucVu();
         }
     }
 }

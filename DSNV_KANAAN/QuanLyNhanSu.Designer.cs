@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lbMaNV = new System.Windows.Forms.TextBox();
             this.addMore = new System.Windows.Forms.Button();
             this.cbChucVu = new System.Windows.Forms.ComboBox();
             this.cbBoPhan = new System.Windows.Forms.ComboBox();
@@ -76,7 +77,7 @@
             this.columnHeader24 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btexportE = new System.Windows.Forms.Button();
-            this.lbMaNV = new System.Windows.Forms.TextBox();
+            this.btImport = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -108,6 +109,14 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // lbMaNV
+            // 
+            this.lbMaNV.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lbMaNV.Location = new System.Drawing.Point(213, 56);
+            this.lbMaNV.Name = "lbMaNV";
+            this.lbMaNV.Size = new System.Drawing.Size(336, 34);
+            this.lbMaNV.TabIndex = 16;
             // 
             // addMore
             // 
@@ -482,6 +491,7 @@
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.btImport);
             this.groupBox2.Controls.Add(this.btexportE);
             this.groupBox2.Controls.Add(this.lstThongTin);
             this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -495,22 +505,26 @@
             // 
             // btexportE
             // 
+            this.btexportE.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btexportE.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btexportE.Location = new System.Drawing.Point(1528, 334);
+            this.btexportE.Location = new System.Drawing.Point(1506, 335);
             this.btexportE.Name = "btexportE";
-            this.btexportE.Size = new System.Drawing.Size(123, 29);
+            this.btexportE.Size = new System.Drawing.Size(145, 29);
             this.btexportE.TabIndex = 9;
             this.btexportE.Text = "Xuất File Excel...";
             this.btexportE.UseVisualStyleBackColor = true;
             this.btexportE.Click += new System.EventHandler(this.btexportE_Click);
             // 
-            // lbMaNV
+            // btImport
             // 
-            this.lbMaNV.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.lbMaNV.Location = new System.Drawing.Point(213, 56);
-            this.lbMaNV.Name = "lbMaNV";
-            this.lbMaNV.Size = new System.Drawing.Size(336, 34);
-            this.lbMaNV.TabIndex = 16;
+            this.btImport.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btImport.Location = new System.Drawing.Point(1338, 335);
+            this.btImport.Name = "btImport";
+            this.btImport.Size = new System.Drawing.Size(137, 29);
+            this.btImport.TabIndex = 18;
+            this.btImport.Text = "Nhập File Excel";
+            this.btImport.UseVisualStyleBackColor = true;
+            this.btImport.Click += new System.EventHandler(this.btImport_Click);
             // 
             // QuanLyNhanSu
             // 
@@ -587,6 +601,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader24;
         private System.Windows.Forms.Button btexportE;
         private System.Windows.Forms.TextBox lbMaNV;
+        private System.Windows.Forms.Button btImport;
     }
 }
 

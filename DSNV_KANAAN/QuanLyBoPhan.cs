@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -11,6 +12,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using _Excel=Microsoft.Office.Interop.Excel;
 
 namespace DSNV_KANAAN
 {
@@ -21,7 +24,7 @@ namespace DSNV_KANAAN
         SqlDataReader docdulieu;
         string sql;
         int i = 0;
-        Dictionary<int,string> Department=new Dictionary<int,string>();
+        DataTable dtBP=new DataTable();
 
         public QuanLyBoPhan()
         {
@@ -31,7 +34,8 @@ namespace DSNV_KANAAN
         private void QuanLyBoPhan_Load(object sender, EventArgs e)
         {
             HienThiThongTinBoPhan();
-            Function.LoadComboBox(Department, cblstBP, "Department_tab");
+            //Function.LoadComboBox(Department, cblstBP, "Department_tab");
+            Function.Load(dtBP ,cblstBP,"Department_tab");
         }
 
         private void HienThiThongTinBoPhan()
@@ -66,7 +70,7 @@ namespace DSNV_KANAAN
             
             using(thuchien=new SqlCommand(sql, ketnoi))
             {
-                thuchien.Parameters.AddWithValue("@Department_id",lbMaBP.Text);
+                thuchien.Parameters.AddWithValue("@Department_id",lbBP.Text);
                 thuchien.Parameters.AddWithValue("@Name",tbTenBoPhan.Text);
 
                 thuchien.ExecuteNonQuery();
@@ -116,19 +120,42 @@ namespace DSNV_KANAAN
         {
             if (!string.IsNullOrEmpty(lbMaBP.Text))
             {
-                ketnoi.Open();
-                sql = @"DELETE FROM Department_tab 
-                WHERE Department_id=@Department_id";
-                using (thuchien = new SqlCommand(sql, ketnoi))
+                try
                 {
-                    thuchien.Parameters.AddWithValue("@Department_id", lbMaBP.Text);
+                    ketnoi.Open();
+                    thuchien = new SqlCommand("DeleteDepartment", ketnoi);
+                    thuchien.CommandType=CommandType.StoredProcedure;
+                    using (thuchien)
+                    {
+                        thuchien.Parameters.AddWithValue("@Department_id", lbMaBP.Text);
 
-                    thuchien.ExecuteNonQuery();
+                        thuchien.ExecuteNonQuery();
+                    }
+                    MessageBox.Show("Bạn đã xóa thành công bộ phận " + tbTenBoPhan.Text);
+                    HienThiThongTinBoPhan();
                 }
+                catch (SqlException ex)
+                {
+                    DialogResult dlr = MessageBox.Show(ex.Message,
+                                "Cảnh Báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (dlr == DialogResult.Yes)
+                    {
+                        thuchien = new SqlCommand("DeleteEmpByDepartment", ketnoi);
+                        thuchien.CommandType = CommandType.StoredProcedure;
+                        using (thuchien)
+                        {
+                            thuchien.Parameters.AddWithValue("@Department_id", lbMaBP.Text);
 
-                ketnoi.Close();
-                MessageBox.Show("Bạn đã xóa thành công bộ phận " + tbTenBoPhan.Text);
-                HienThiThongTinBoPhan();
+                            thuchien.ExecuteNonQuery();
+                        }
+                        MessageBox.Show("Bạn đã xóa thành công bộ phận " + tbTenBoPhan.Text);
+                        HienThiThongTinBoPhan();
+                    }
+                }
+                finally
+                {
+                    ketnoi.Close();
+                }
             }
             else
             {
@@ -140,7 +167,7 @@ namespace DSNV_KANAAN
         private void btSearch_Click(object sender, EventArgs e)
         {
             lstThongTinNV.Items.Clear();
-            int id=Function.GetId(Department,cblstBP.Text);
+            int id=Function.GetId(dtBP, cblstBP.Text);
 
             ketnoi.Open();
             thuchien = new SqlCommand("GetDetailsKHByDP", ketnoi);
@@ -153,7 +180,7 @@ namespace DSNV_KANAAN
             {
                 lstThongTinNV.Items.Add(docdulieu[0].ToString());
                 lstThongTinNV.Items[i].SubItems.Add(docdulieu["Department_Name"].ToString());
-                lstThongTinNV.Items[i].SubItems.Add(docdulieu["Employee_id"].ToString());
+                lstThongTinNV.Items[i].SubItems.Add(docdulieu["Emp_code"].ToString());
                 lstThongTinNV.Items[i].SubItems.Add(docdulieu["Full_Name"].ToString());
                 lstThongTinNV.Items[i].SubItems.Add(docdulieu["Jobtitle_Name"].ToString());
 
@@ -172,6 +199,17 @@ namespace DSNV_KANAAN
         {
             lbMaBP.Text = "";
             tbTenBoPhan.Text = "";
+        }
+
+        private void btExport_Click(object sender, EventArgs e)
+        {
+            Function.ExportExcel(lstThongTinBP, "Danh Sách Bộ Phận", "Danh Sách Bộ Phận");
+        }
+
+        private void btImport_Click(object sender, EventArgs e)
+        {
+            Function.ImportExcelBPvaCV("AddDepartment");
+            HienThiThongTinBoPhan();
         }
     }
 }

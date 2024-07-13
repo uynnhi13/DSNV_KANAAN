@@ -1,76 +1,67 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using _Excel = Microsoft.Office.Interop.Excel;
 
 namespace DSNV_KANAAN
 {
     internal class Function
     {
-        public static string chuoiketnoi = @"Data Source=LEUYENNHI;Initial Catalog=DanhSachNVKanaan;Integrated Security=True";
+        public static SqlConnection ketnoi=new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
         public static SqlCommand thuchien;
-        public static SqlConnection ketnoi;
         public static SqlDataReader docdulieu;
         public static string sql;
-        public static void LoadComboBox(Dictionary<int, string> dictionary, ComboBox comboBox,string tenBang)
+
+        static Function()
         {
-            
-            using (ketnoi = new SqlConnection(chuoiketnoi))
+
+        }
+
+        public static void Load(DataTable dt,ComboBox cb,string nameData)
+        {
+            try
             {
                 ketnoi.Open();
-                string sql = @"SELECT * FROM "+tenBang;
-                using (SqlCommand thuchien = new SqlCommand(sql, ketnoi))
+                SqlDataAdapter da = new SqlDataAdapter("select * from "+nameData, ketnoi);
+                da.Fill(dt);
+                foreach(DataRow dr in dt.Rows)
                 {
-                    using (SqlDataReader docdulieu = thuchien.ExecuteReader())
-                    {
-                        while (docdulieu.Read())
-                        {
-                            int jobTitle_id = docdulieu.GetInt32(0);
-                            string jobtitleName = docdulieu.GetString(1);
-                            dictionary.Add(jobTitle_id, jobtitleName);
-                            comboBox.Items.Add(jobtitleName);
-                        }
-                    }
+                    cb.Items.Add(dr[1]);
                 }
+            }
+            catch (Exception ex)
+            {
+                
+            }
+            finally
+            {
+                ketnoi.Close();
             }
         }
 
-        public static void LoadComboBoxButNoAdd(ComboBox comboBox, string tenBang)
+        public static int GetId(DataTable dt,string Name)
         {
-            string chuoiketnoi = @"Data Source=LEUYENNHI;Initial Catalog=DanhSachNVKanaan;Integrated Security=True";
-            using (SqlConnection ketnoi = new SqlConnection(chuoiketnoi))
+            if (dt == null)
             {
-                ketnoi.Open();
-                string sql = @"SELECT * FROM " + tenBang;
-                using (SqlCommand thuchien = new SqlCommand(sql, ketnoi))
-                {
-                    using (SqlDataReader docdulieu = thuchien.ExecuteReader())
-                    {
-                        while (docdulieu.Read())
-                        {
-                            int jobTitle_id = docdulieu.GetInt32(0);
-                            string jobtitleName = docdulieu.GetString(1);
-                            comboBox.Items.Add(jobtitleName);
-                        }
-                    }
-                }
+                throw new InvalidOperationException("DataTable dt chưa được khởi tạo.");
             }
-        }
 
-        public static int GetId(Dictionary<int, string> Dic, string Name)
-        {
-            foreach (var i in Dic)
+            foreach (DataRow d in dt.Rows)
             {
-                if (i.Value == Name)
+                if (d[1].ToString() == Name)
                 {
-                    return i.Key;
+                    return Convert.ToInt32(d[0]);
                 }
             }
             return -1;
         }
+
 
         //TỰ ĐỘNG TẠO EMP_CODE
         public string GenerateEmpCode(int employeeCount)
@@ -89,25 +80,215 @@ namespace DSNV_KANAAN
             {
                 sql = @"Select * FROM " + "Jobtitle_tab";
             }
-            using(ketnoi=new SqlConnection(chuoiketnoi))
+            ketnoi.Open();
+            //using(ketnoi)
+            //{
+
+            //}
+            int i = 0;
+            lstThongTin.Controls.Clear();
+
+            thuchien = new SqlCommand(sql, ketnoi);
+            docdulieu = thuchien.ExecuteReader();
+
+            while (docdulieu.Read())
             {
-                int i = 0;
-                lstThongTin.Controls.Clear();
-                ketnoi.Open();
+                lstThongTin.Items.Add(docdulieu[0].ToString());
+                lstThongTin.Items[i].SubItems.Add(docdulieu[1].ToString());
+                i++;
+            }
+            lstThongTin.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            lstThongTin.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+
+            ketnoi.Close();
+        }
+
+        public static void ExportExcel(ListView lstView, string sheetName, string title)
+        {
+            //TẠO CÁC ĐỐI TƯỢNG EXCEL
+            Microsoft.Office.Interop.Excel.Application oExcel = new Microsoft.Office.Interop.Excel.Application();
+            Microsoft.Office.Interop.Excel.Sheets oSheets;
+            Microsoft.Office.Interop.Excel.Workbooks oBooks;
+            Microsoft.Office.Interop.Excel.Worksheet oSheet;
+            Microsoft.Office.Interop.Excel.Workbook oBook;
+
+            //TẠO MỚI MỘT EXCEL WORKBOOK
+            oExcel.Visible = true;
+            oExcel.DisplayAlerts = false;
+            oExcel.Application.SheetsInNewWorkbook = 1;
+            oBooks = oExcel.Workbooks;
+            oBook = (Microsoft.Office.Interop.Excel.Workbook)(oExcel.Workbooks.Add(Type.Missing));
+            oSheets = oBook.Worksheets;
+            oSheet = (Microsoft.Office.Interop.Excel.Worksheet)oSheets.get_Item(1);
+            oSheet.Name = sheetName;
+
+            //TẠO PHẦN TIÊU ĐỀ
+            string endColumn = Convert.ToChar('A' + lstView.Columns.Count - 1).ToString() + "1";
+            Microsoft.Office.Interop.Excel.Range head = oSheet.get_Range("A1",endColumn);
+            head.MergeCells = true;
+            head.Value2 = title;
+            head.Font.Bold = true;
+            head.Font.Name = "Times New Roman";
+            head.Font.Size = "20";
+            head.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+
+            //TẠO TIÊU ĐỀ CỘT
+            //Microsoft.Office.Interop.Excel.Range c11 = oSheet.get_Range("A3", "A3");
+            //c11.Value2 = "Mã Nhân Viên";
+            //c11.ColumnWidth = 12;
+
+            //Microsoft.Office.Interop.Excel.Range c12 = oSheet.get_Range("B3", "B3");
+            //c12.Value2 = "Họ tên";
+            //c12.ColumnWidth = 25.0;
+
+            //Microsoft.Office.Interop.Excel.Range c13 = oSheet.get_Range("C3", "C3");
+            //c13.Value2 = "Ngày Sinh";
+            //c13.ColumnWidth = 25;
+
+            for (int i = 0; i < lstView.Columns.Count; i++)
+            {
+                Microsoft.Office.Interop.Excel.Range col = oSheet.get_Range((char)('A' + i) + "3", Type.Missing);
+                col.Value2 = lstView.Columns[i].Text;
+                col.ColumnWidth = lstView.Columns[i].Width / 10;
+                col.Font.Bold = true;
+                col.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+            }
+
+            //TẠO MẢNG THEO DATABASE
+            object[,] arr = new object[lstView.Items.Count, lstView.Columns.Count];
+
+            //CHUYỂN DỮ LIỆU TỪ DB VÀO MẢNG ĐỐI TƯỢNG
+            //for (int item = 0; item < lstView.Items.Count; item++)
+            //{
+            //    ListViewItem listViewItem = lstView.Items[item];
+
+            //    for (int col = 0; col < lstView.Columns.Count; col++)
+            //    {
+            //        arr[item, col] = "'" + listViewItem.SubItems[col].Text;
+            //    }
+            //}
+
+            //CHUYỂN DỮ LIỆU TỪ DB VÀO MẢNG ĐỐI TƯỢNG
+            for (int item = 0; item < lstView.Items.Count; item++)
+            {
+                ListViewItem listViewItem = lstView.Items[item];
+
+                for (int col = 0; col < lstView.Columns.Count; col++)
+                {
+                    var value = listViewItem.SubItems[col].Text;
+
+                    // Kiểm tra nếu giá trị là chuỗi
+                    if (value is string)
+                    {
+                        arr[item, col] = value; // Nếu là chuỗi, giữ nguyên
+                    }
+                    else
+                    {
+                        arr[item, col] = Convert.ToDateTime(value); // Nếu không, chuyển đổi sang DateTime
+                    }
+                }
+            }
+
+            //THIẾT LẬP VÙNG ĐIỀN DỮ LIỆU
+            int rowStart = 4;
+            int columnStart = 1;
+            int rowEnd = rowStart + lstView.Items.Count - 1;
+            int columnEnd = lstView.Columns.Count;
+
+            //Ô BẮT ĐẦU ĐIỀN DỮ LIỆU
+            Microsoft.Office.Interop.Excel.Range c1 = (Microsoft.Office.Interop.Excel.Range)oSheet.Cells[rowStart, columnStart];
+            //Ô KẾT THÚC ĐIỀN DỮ LIỆU
+            Microsoft.Office.Interop.Excel.Range c2 = (Microsoft.Office.Interop.Excel.Range)oSheet.Cells[rowEnd, columnEnd];
+
+            //LẤY VỀ VÙNG DỮ LIỆU
+            Microsoft.Office.Interop.Excel.Range range = oSheet.get_Range(c1, c2);
+            //ĐIỀN DỮ LIỆU VÀO VÙNG ĐÃ THIẾT LẬP
+            range.Value2 = arr;
+            oSheet.get_Range(c1, c2).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+        }
+
+        public static DataTable ImportExcel(string filePath)
+        {
+            DataTable dt = new DataTable();
+            _Excel.Application excel = new _Excel.Application();
+            _Excel.Workbook wb = excel.Workbooks.Open(filePath);
+            _Excel.Worksheet ws = wb.Worksheets[1];
+            _Excel.Range range = ws.UsedRange;
+
+            // Đọc header
+            for (int col = 1; col <= range.Columns.Count; col++)
+            {
+                dt.Columns.Add(range.Cells[3, col].Value2.ToString());
+            }
+
+            // Đọc dữ liệu
+            for (int row = 4; row <= range.Rows.Count; row++)
+{
+                DataRow dr = dt.NewRow();
+                bool isEmptyRow = true; 
+                for (int col = 2; col <= range.Columns.Count; col++)
+                {
+                    object cellValue = range.Cells[row, col].Value2;
+                    if (cellValue != null)
+                    {
+                        dr[col - 1] = cellValue.ToString();
+                        isEmptyRow = false; // Đánh dấu là dòng này có dữ liệu
+                    }
+                }
+
+                // Nếu dòng không có dữ liệu (tất cả các cell đều là null)
+                // Thì dừng vòng lặp
+                if (isEmptyRow)
+                {
+                    break;
+                }
+
+                dt.Rows.Add(dr);
+            }
+
+            // Đóng workbook và quit Excel
+            wb.Close(false);
+            excel.Quit();
+
+            return dt;
+        }
+
+        public static void ImportExcelBPvaCV(string nameProc)
+        {
+            OpenFileDialog op = new OpenFileDialog();
+            op.Filter = "Excel Sheet (*.xlsx)|*.xlsx|All Files (*.*)|*.*";
+
+            if (op.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = op.FileName;
 
                 
-                thuchien = new SqlCommand(sql, ketnoi);
-                docdulieu = thuchien.ExecuteReader();
+                DataTable importedDataTable = Function.ImportExcel(filePath);
+                ketnoi.Open();
 
-                while (docdulieu.Read())
+                // Duyệt qua từng hàng trong DataTable
+                foreach (DataRow row in importedDataTable.Rows)
                 {
-                    lstThongTin.Items.Add(docdulieu[0].ToString());
-                    lstThongTin.Items[i].SubItems.Add(docdulieu[1].ToString());
-                    i++;
+                    SqlCommand thuchien = new SqlCommand(nameProc, ketnoi);
+                    thuchien.CommandType = CommandType.StoredProcedure;
+                    using (thuchien)
+                    {
+                        try
+                        {
+                            thuchien.Parameters.AddWithValue("@Name", row[1]);
+                            // Thực thi câu lệnh chèn
+                            thuchien.ExecuteNonQuery();
+                        }
+                        catch (Exception ex)
+                        {
+                            continue;
+                        }
+                    }
                 }
 
                 ketnoi.Close();
             }
         }
+
     }
 }

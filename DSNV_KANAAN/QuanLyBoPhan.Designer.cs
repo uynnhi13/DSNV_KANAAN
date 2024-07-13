@@ -40,17 +40,19 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lbMaBP = new System.Windows.Forms.Label();
+            this.lbBP = new System.Windows.Forms.Label();
             this.tbTenBoPhan = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btImport = new System.Windows.Forms.Button();
+            this.btExport = new System.Windows.Forms.Button();
             this.lstThongTinBP = new System.Windows.Forms.ListView();
-            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btAdd = new System.Windows.Forms.Button();
             this.btDelete = new System.Windows.Forms.Button();
             this.btUpdate = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -148,9 +150,9 @@
             // 
             this.groupBox2.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.groupBox2.Controls.Add(this.lbMaBP);
+            this.groupBox2.Controls.Add(this.lbBP);
             this.groupBox2.Controls.Add(this.tbTenBoPhan);
             this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(152, 78);
             this.groupBox2.Name = "groupBox2";
@@ -161,17 +163,29 @@
             // 
             // lbMaBP
             // 
+            this.lbMaBP.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lbMaBP.AutoSize = true;
-            this.lbMaBP.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbMaBP.Location = new System.Drawing.Point(189, 45);
+            this.lbMaBP.Location = new System.Drawing.Point(222, 53);
             this.lbMaBP.Name = "lbMaBP";
-            this.lbMaBP.Size = new System.Drawing.Size(0, 28);
-            this.lbMaBP.TabIndex = 11;
+            this.lbMaBP.Size = new System.Drawing.Size(23, 16);
+            this.lbMaBP.TabIndex = 12;
+            this.lbMaBP.Text = "__";
+            // 
+            // lbBP
+            // 
+            this.lbBP.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lbBP.AutoSize = true;
+            this.lbBP.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbBP.Location = new System.Drawing.Point(50, 43);
+            this.lbBP.Name = "lbBP";
+            this.lbBP.Size = new System.Drawing.Size(126, 28);
+            this.lbBP.TabIndex = 11;
+            this.lbBP.Text = "Mã Bộ Phận";
             // 
             // tbTenBoPhan
             // 
             this.tbTenBoPhan.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbTenBoPhan.Location = new System.Drawing.Point(185, 85);
+            this.tbTenBoPhan.Location = new System.Drawing.Point(225, 95);
             this.tbTenBoPhan.Name = "tbTenBoPhan";
             this.tbTenBoPhan.Size = new System.Drawing.Size(267, 30);
             this.tbTenBoPhan.TabIndex = 10;
@@ -180,25 +194,17 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(34, 89);
+            this.label3.Location = new System.Drawing.Point(47, 97);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(129, 28);
             this.label3.TabIndex = 8;
             this.label3.Text = "Tên Bộ Phận";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(34, 45);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(126, 28);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "Mã Bộ Phận";
-            // 
             // groupBox3
             // 
             this.groupBox3.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.groupBox3.Controls.Add(this.btImport);
+            this.groupBox3.Controls.Add(this.btExport);
             this.groupBox3.Controls.Add(this.lstThongTinBP);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.Location = new System.Drawing.Point(152, 310);
@@ -208,32 +214,44 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Danh sách các bộ phận";
             // 
+            // btImport
+            // 
+            this.btImport.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btImport.Location = new System.Drawing.Point(196, 250);
+            this.btImport.Name = "btImport";
+            this.btImport.Size = new System.Drawing.Size(151, 23);
+            this.btImport.TabIndex = 14;
+            this.btImport.Text = "Nhập File Excel";
+            this.btImport.UseVisualStyleBackColor = true;
+            this.btImport.Click += new System.EventHandler(this.btImport_Click);
+            // 
+            // btExport
+            // 
+            this.btExport.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btExport.Location = new System.Drawing.Point(372, 250);
+            this.btExport.Name = "btExport";
+            this.btExport.Size = new System.Drawing.Size(151, 23);
+            this.btExport.TabIndex = 13;
+            this.btExport.Text = "Xuất File Excel";
+            this.btExport.UseVisualStyleBackColor = true;
+            this.btExport.Click += new System.EventHandler(this.btExport_Click);
+            // 
             // lstThongTinBP
             // 
             this.lstThongTinBP.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lstThongTinBP.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader6,
-            this.columnHeader7});
+            this.columnHeader8,
+            this.columnHeader9});
             this.lstThongTinBP.FullRowSelect = true;
             this.lstThongTinBP.GridLines = true;
             this.lstThongTinBP.HideSelection = false;
-            this.lstThongTinBP.Location = new System.Drawing.Point(39, 42);
+            this.lstThongTinBP.Location = new System.Drawing.Point(39, 36);
             this.lstThongTinBP.Name = "lstThongTinBP";
-            this.lstThongTinBP.Size = new System.Drawing.Size(484, 226);
+            this.lstThongTinBP.Size = new System.Drawing.Size(484, 190);
             this.lstThongTinBP.TabIndex = 12;
             this.lstThongTinBP.UseCompatibleStateImageBehavior = false;
             this.lstThongTinBP.View = System.Windows.Forms.View.Details;
             this.lstThongTinBP.SelectedIndexChanged += new System.EventHandler(this.listView2_SelectedIndexChanged);
-            // 
-            // columnHeader6
-            // 
-            this.columnHeader6.Text = "Mã Bộ Phận";
-            this.columnHeader6.Width = 124;
-            // 
-            // columnHeader7
-            // 
-            this.columnHeader7.Text = "Tên Bộ Phận";
-            this.columnHeader7.Width = 200;
             // 
             // btAdd
             // 
@@ -270,6 +288,14 @@
             this.btUpdate.Text = "Sửa";
             this.btUpdate.UseVisualStyleBackColor = true;
             this.btUpdate.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // columnHeader8
+            // 
+            this.columnHeader8.Text = "Mã Bộ Phận";
+            // 
+            // columnHeader9
+            // 
+            this.columnHeader9.Text = "Tên Bộ Phận";
             // 
             // QuanLyBoPhan
             // 
@@ -312,15 +338,17 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox tbTenBoPhan;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.ListView lstThongTinBP;
-        private System.Windows.Forms.ColumnHeader columnHeader6;
-        private System.Windows.Forms.ColumnHeader columnHeader7;
         private System.Windows.Forms.Button btAdd;
         private System.Windows.Forms.Button btDelete;
-        private System.Windows.Forms.Label lbMaBP;
         private System.Windows.Forms.Button btUpdate;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Button btExport;
+        private System.Windows.Forms.Button btImport;
+        private System.Windows.Forms.Label lbMaBP;
+        private System.Windows.Forms.Label lbBP;
+        private System.Windows.Forms.ColumnHeader columnHeader8;
+        private System.Windows.Forms.ColumnHeader columnHeader9;
     }
 }
