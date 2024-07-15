@@ -79,8 +79,8 @@ namespace DSNV_KANAAN
 
         private void LoadThongTin()
         {
-            Function.Load(dtCV, cbChucVu, "Jobtitle_tab");
-            Function.Load(dtBP, cbBoPhan, "Department_tab");
+            Function.Load(dtCV, cbChucVu);
+            Function.Load(dtBP, cbBoPhan);
         }
 
 
@@ -296,60 +296,63 @@ namespace DSNV_KANAAN
         {
             OpenFileDialog op = new OpenFileDialog();
             op.Filter = "Excel Sheet (*.xlsx)|*.xlsx|All Files (*.*)|*.*";
-
+            
             if (op.ShowDialog() == DialogResult.OK)
             {
                 string filePath = op.FileName;
+                DetailsImport detail=new DetailsImport();
+                detail.filePath=filePath;
+                detail.Show();
 
                 // Gọi hàm ImportExcel để đọc dữ liệu từ file Excel vào DataTable
-                int coll = lstThongTin.Items.Count;
-                DataTable importedDataTable = Function.ImportExcel(filePath);
+                //int coll = lstThongTin.Items.Count;
+                //DataTable importedDataTable = Function.ImportExcel(filePath);
 
-                ketnoi.Open();
-                foreach (DataRow row in importedDataTable.Rows)
-                {
-                    SqlCommand thuchien = new SqlCommand("AddEmployeeData", ketnoi);
-                    thuchien.CommandType = CommandType.StoredProcedure;
-                    using (thuchien)
-                    {
-                        try
-                        {
-                            thuchien.Parameters.AddWithValue("@Emp_code", "");
-                            thuchien.Parameters.AddWithValue("@Full_name", row[1]);
-                            thuchien.Parameters.AddWithValue("@Birthday", DateTime.ParseExact(row[2].ToString(), "dd/MM/yyyy", null));
-                            thuchien.Parameters.AddWithValue("@LoaiHD", row[3]);
-                            thuchien.Parameters.AddWithValue("@Department_id", 19);
-                            thuchien.Parameters.AddWithValue("@Jobtitle_id", 3);
-                            thuchien.Parameters.AddWithValue("@NgayNhanViec", DateTime.ParseExact(row[6].ToString(), "dd/MM/yyyy", null));
-                            thuchien.Parameters.AddWithValue("@NgayKyHopDong", DateTime.ParseExact(row[7].ToString(), "dd/MM/yyyy", null));
-                            thuchien.Parameters.AddWithValue("@NgayHetHan", DateTime.ParseExact(row[8].ToString(), "dd/MM/yyyy", null));
-                            thuchien.Parameters.AddWithValue("@ThangThamGiaBHXH", DateTime.ParseExact(row[9].ToString(), "dd/MM/yyyy", null));
-                            thuchien.Parameters.AddWithValue("@NoiSinh", row[10]);
-                            thuchien.Parameters.AddWithValue("@NguyenQuan", row[11]);
-                            thuchien.Parameters.AddWithValue("@CMND", row[12]);
-                            thuchien.Parameters.AddWithValue("@NgayCap", DateTime.ParseExact(row[13].ToString(), "dd/MM/yyyy", null));
-                            thuchien.Parameters.AddWithValue("@NoiCap", row[14]);
-                            thuchien.Parameters.AddWithValue("@DienThoai", row[15]);
-                            thuchien.Parameters.AddWithValue("@DiaChi", row[16]);
-                            thuchien.Parameters.AddWithValue("@GioiTinh", row[17]);
-                            thuchien.Parameters.AddWithValue("@MaSoThue", row[18]);
-                            thuchien.Parameters.AddWithValue("@SoTaiKhoan", row[19]);
-                            thuchien.Parameters.AddWithValue("@SoSoBHXH", row[20]);
-                            thuchien.Parameters.AddWithValue("@DanToc", 1);
-                            thuchien.Parameters.AddWithValue("@TonGiao", 1);
-                            thuchien.Parameters.AddWithValue("@TrinhDo", 1);
+                //ketnoi.Open();
+                //foreach (DataRow row in importedDataTable.Rows)
+                //{
+                //    SqlCommand thuchien = new SqlCommand("AddEmployeeData", ketnoi);
+                //    thuchien.CommandType = CommandType.StoredProcedure;
+                //    using (thuchien)
+                //    {
+                //        try
+                //        {
+                //            thuchien.Parameters.AddWithValue("@Emp_code", "");
+                //            thuchien.Parameters.AddWithValue("@Full_name", row[1]);
+                //            thuchien.Parameters.AddWithValue("@Birthday", row[2]);
+                //            thuchien.Parameters.AddWithValue("@LoaiHD", row[3]);
+                //            thuchien.Parameters.AddWithValue("@Department_id", 19);
+                //            thuchien.Parameters.AddWithValue("@Jobtitle_id", 3);
+                //            thuchien.Parameters.AddWithValue("@NgayNhanViec", row[6]);
+                //            thuchien.Parameters.AddWithValue("@NgayKyHopDong",row[7]);
+                //            thuchien.Parameters.AddWithValue("@NgayHetHan",row[8]);
+                //            thuchien.Parameters.AddWithValue("@ThangThamGiaBHXH", row[9]);
+                //            thuchien.Parameters.AddWithValue("@NoiSinh", row[10]);
+                //            thuchien.Parameters.AddWithValue("@NguyenQuan", row[11]);
+                //            thuchien.Parameters.AddWithValue("@CMND", row[12]);
+                //            thuchien.Parameters.AddWithValue("@NgayCap", row[13]);
+                //            thuchien.Parameters.AddWithValue("@NoiCap", row[14]);
+                //            thuchien.Parameters.AddWithValue("@DienThoai", row[15]);
+                //            thuchien.Parameters.AddWithValue("@DiaChi", row[16]);
+                //            thuchien.Parameters.AddWithValue("@GioiTinh", row[17]);
+                //            thuchien.Parameters.AddWithValue("@MaSoThue", row[18]);
+                //            thuchien.Parameters.AddWithValue("@SoTaiKhoan", row[19]);
+                //            thuchien.Parameters.AddWithValue("@SoSoBHXH", row[20]);
+                //            thuchien.Parameters.AddWithValue("@DanToc", 1);
+                //            thuchien.Parameters.AddWithValue("@TonGiao", 1);
+                //            thuchien.Parameters.AddWithValue("@TrinhDo", 1);
 
-                            thuchien.ExecuteNonQuery();
-                            
-                        }
-                        catch (Exception ex)
-                        {
-                            continue;
-                        }
-                    }
-                }
+                //            thuchien.ExecuteNonQuery();
 
-                ketnoi.Close();
+                //        }
+                //        catch (Exception ex)
+                //        {
+                //            continue;
+                //        }
+                //    }
+                //}
+
+                //ketnoi.Close();
             }
         }
     }

@@ -35,7 +35,7 @@ namespace DSNV_KANAAN
         {
             HienThiThongTinBoPhan();
             //Function.LoadComboBox(Department, cblstBP, "Department_tab");
-            Function.Load(dtBP ,cblstBP,"Department_tab");
+            Function.Load(dtBP ,cblstBP);
         }
 
         private void HienThiThongTinBoPhan()

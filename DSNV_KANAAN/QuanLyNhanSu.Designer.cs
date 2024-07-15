@@ -76,8 +76,8 @@
             this.columnHeader23 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader24 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btexportE = new System.Windows.Forms.Button();
             this.btImport = new System.Windows.Forms.Button();
+            this.btexportE = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -503,6 +503,17 @@
             this.groupBox2.Text = "Thông Tin Nhân Viên";
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
+            // btImport
+            // 
+            this.btImport.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btImport.Location = new System.Drawing.Point(1338, 335);
+            this.btImport.Name = "btImport";
+            this.btImport.Size = new System.Drawing.Size(137, 29);
+            this.btImport.TabIndex = 18;
+            this.btImport.Text = "Nhập File Excel";
+            this.btImport.UseVisualStyleBackColor = true;
+            this.btImport.Click += new System.EventHandler(this.btImport_Click);
+            // 
             // btexportE
             // 
             this.btexportE.Anchor = System.Windows.Forms.AnchorStyles.Top;
@@ -514,17 +525,6 @@
             this.btexportE.Text = "Xuất File Excel...";
             this.btexportE.UseVisualStyleBackColor = true;
             this.btexportE.Click += new System.EventHandler(this.btexportE_Click);
-            // 
-            // btImport
-            // 
-            this.btImport.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btImport.Location = new System.Drawing.Point(1338, 335);
-            this.btImport.Name = "btImport";
-            this.btImport.Size = new System.Drawing.Size(137, 29);
-            this.btImport.TabIndex = 18;
-            this.btImport.Text = "Nhập File Excel";
-            this.btImport.UseVisualStyleBackColor = true;
-            this.btImport.Click += new System.EventHandler(this.btImport_Click);
             // 
             // QuanLyNhanSu
             // 

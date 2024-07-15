@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OfficeOpenXml;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -18,26 +19,87 @@ namespace DSNV_KANAAN
         public static SqlDataReader docdulieu;
         public static string sql;
 
+        public static DataTable dtBP = new DataTable();
+        public static DataTable dtCV = new DataTable();
+        public static DataTable dtDT = new DataTable();
+        public static DataTable dtTG = new DataTable();
+        public static DataTable dtTD = new DataTable();
+        public static DataTable dtDD = new DataTable();
+
         static Function()
         {
-
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            LoadTable(dtCV,"Jobtitle_tab");
+            Function.LoadTable(dtBP,"Department_tab");
+            Function.LoadTable(dtTG,"TonGiao");
+            Function.LoadTable(dtDT,"DanToc");
+            Function.LoadTable(dtTD,"TrinhDoDaiHoc");
+            Function.LoadTable(dtDD,"DiaDiem");
+            Function.LoadTable(dtDD,"DiaDiem");
+            Function.LoadTable(dtDD,"DiaDiem");
         }
 
-        public static void Load(DataTable dt,ComboBox cb,string nameData)
+        public static void LoadTable(DataTable dt, string nameData)
         {
             try
             {
                 ketnoi.Open();
-                SqlDataAdapter da = new SqlDataAdapter("select * from "+nameData, ketnoi);
+                SqlDataAdapter da = new SqlDataAdapter("select * from " + nameData, ketnoi);
                 da.Fill(dt);
-                foreach(DataRow dr in dt.Rows)
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                ketnoi.Close();
+            }
+        }
+
+        public static DataTable data(string key)
+        {
+            DataTable db=new DataTable();
+            switch(key) 
+            {
+                case "BP":
+                    db = dtBP;
+                    break;
+                case "CV":
+                    db = dtCV;
+                    break;
+                case "TG":
+                    db = dtTG;
+                    break;
+                case "DT":
+                    db = dtDT;
+                    break;
+                case "TD":
+                    db = dtTD;
+                    break;
+                case "DD":
+                    db = dtDD;
+                    break;
+                default: break;
+            }
+
+            return db;
+
+        }
+
+
+        public static void Load(DataTable dt, ComboBox cb)
+        {
+            try
+            {
+                foreach (DataRow dr in dt.Rows)
                 {
                     cb.Items.Add(dr[1]);
                 }
             }
             catch (Exception ex)
             {
-                
+
             }
             finally
             {
@@ -132,6 +194,8 @@ namespace DSNV_KANAAN
             head.Font.Size = "20";
             head.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
 
+            List<int> dateColumns = new List<int>();
+
             //TẠO TIÊU ĐỀ CỘT
             //Microsoft.Office.Interop.Excel.Range c11 = oSheet.get_Range("A3", "A3");
             //c11.Value2 = "Mã Nhân Viên";
@@ -177,14 +241,18 @@ namespace DSNV_KANAAN
                 {
                     var value = listViewItem.SubItems[col].Text;
 
-                    // Kiểm tra nếu giá trị là chuỗi
-                    if (value is string)
+                    DateTime tempDate;
+                    if (DateTime.TryParseExact(value, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out tempDate))
                     {
-                        arr[item, col] = value; // Nếu là chuỗi, giữ nguyên
+                        arr[item, col] = tempDate;
+                        if (!dateColumns.Contains(col))
+                        {
+                            dateColumns.Add(col);
+                        }
                     }
                     else
                     {
-                        arr[item, col] = Convert.ToDateTime(value); // Nếu không, chuyển đổi sang DateTime
+                        arr[item, col] = value; // Nếu không thể chuyển đổi, giữ nguyên chuỗi
                     }
                 }
             }
@@ -194,6 +262,7 @@ namespace DSNV_KANAAN
             int columnStart = 1;
             int rowEnd = rowStart + lstView.Items.Count - 1;
             int columnEnd = lstView.Columns.Count;
+
 
             //Ô BẮT ĐẦU ĐIỀN DỮ LIỆU
             Microsoft.Office.Interop.Excel.Range c1 = (Microsoft.Office.Interop.Excel.Range)oSheet.Cells[rowStart, columnStart];
@@ -223,7 +292,7 @@ namespace DSNV_KANAAN
 
             // Đọc dữ liệu
             for (int row = 4; row <= range.Rows.Count; row++)
-{
+            {
                 DataRow dr = dt.NewRow();
                 bool isEmptyRow = true; 
                 for (int col = 2; col <= range.Columns.Count; col++)
@@ -287,6 +356,38 @@ namespace DSNV_KANAAN
                 }
 
                 ketnoi.Close();
+            }
+        }
+
+        public static void LoadExcelData(string filePath, DataGridView dataGridView1)
+        {
+            using (var package = new ExcelPackage(new System.IO.FileInfo(filePath)))
+            {
+                //Lấy sheet đầu tiên trong excel
+                var worksheet = package.Workbook.Worksheets[0];
+
+                DataTable dataTable = new DataTable();
+                bool hasHeader = true; // Sử dụng dòng đầu tiên làm tiêu đề cột
+
+                foreach (var firstRowCell in worksheet.Cells[3, 1, 3, worksheet.Dimension.End.Column])
+                {
+                    dataTable.Columns.Add(hasHeader ? firstRowCell.Text : string.Format("Column {0}", firstRowCell.Start.Column));
+                }
+
+                var startRow = hasHeader ? 4 : 1;
+
+                for (int rowNum = startRow; rowNum <= worksheet.Dimension.End.Row; rowNum++)
+                {
+                    var wsRow = worksheet.Cells[rowNum, 1, rowNum, worksheet.Dimension.End.Column];
+                    DataRow row = dataTable.NewRow();
+                    foreach (var cell in wsRow)
+                    {
+                        row[cell.Start.Column - 1] = cell.Text;
+                    }
+                    dataTable.Rows.Add(row);
+                }
+
+                dataGridView1.DataSource = dataTable;
             }
         }
 

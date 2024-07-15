@@ -29,7 +29,7 @@ namespace DSNV_KANAAN
         private void QuanLyChucVu_Load(object sender, EventArgs e)
         {
             HienThiThongTinChucVu();
-            Function.Load(dtCV, cblstCV, "Jobtitle_tab");
+            Function.Load(dtCV, cblstCV);
         }
 
         private void HienThiThongTinChucVu()
