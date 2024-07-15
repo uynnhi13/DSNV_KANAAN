@@ -35,16 +35,23 @@ namespace DSNV_KANAAN
             ketnoi.Open();
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
-               
+                if (row.IsNewRow)
+                {
+                    break; // Ngừng vòng lặp nếu hàng trống
+                }
+
                 SqlCommand thuchien = new SqlCommand("AddEmployeeData", ketnoi);
                 thuchien.CommandType = CommandType.StoredProcedure;
                 using (thuchien)
                 {
-                    int departmentID = Function.GetId(Function.data("BP"), row.Cells[4].Value.ToString());
-                    int jobtitleID = Function.GetId(Function.data("CV"), row.Cells[5].Value.ToString());
-                    int DanToc = Function.GetId(Function.data("DT"), row.Cells[21].Value.ToString());
-                    int TonGiao = Function.GetId(Function.data("TG"), row.Cells[22].Value.ToString());
-                    int TrinhDo = Function.GetId(Function.data("TD"), row.Cells[23].Value.ToString());
+                    int departmentID = Function.GetId("BP", row.Cells[4].Value.ToString());
+                    int jobtitleID = Function.GetId("CV", row.Cells[5].Value.ToString());
+                    int DanToc = Function.GetId("DT", row.Cells[21].Value.ToString());
+                    int TonGiao = Function.GetId("TG", row.Cells[22].Value.ToString());
+                    int TrinhDo = Function.GetId("TD", row.Cells[23].Value.ToString());
+                    int DiaDiem = Function.GetId("DD", row.Cells[10].Value.ToString());
+                    DiaDiem = Function.GetId("DD", row.Cells[11].Value.ToString());
+                    DiaDiem = Function.GetId("DD", row.Cells[14].Value.ToString());
 
                     try
                     {
@@ -85,6 +92,8 @@ namespace DSNV_KANAAN
             }
 
             ketnoi.Close();
+            MessageBox.Show("Đã thêm dữ liệu thành công");
+            this.Close();
         }
 
         private static void AddMoreIn4()

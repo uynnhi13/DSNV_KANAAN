@@ -25,8 +25,6 @@ namespace DSNV_KANAAN
         SqlCommand thuchien;
         SqlDataReader docdulieu;
         int i = 0;
-        DataTable dtCV=new DataTable();
-        DataTable dtBP=new DataTable();
 
 
         private void Form1_Load(object sender, EventArgs e)
@@ -79,8 +77,8 @@ namespace DSNV_KANAAN
 
         private void LoadThongTin()
         {
-            Function.Load(dtCV, cbChucVu);
-            Function.Load(dtBP, cbBoPhan);
+            Function.Load(Function.data("CV"), cbChucVu);
+            Function.Load(Function.data("BP"), cbBoPhan);
         }
 
 
@@ -149,8 +147,8 @@ namespace DSNV_KANAAN
         {
             lstThongTin.Items.Clear();
             ketnoi.Open();
-            int departmentID = Function.GetId(dtBP, cbBoPhan.Text);
-            int jobtitleID=Function.GetId(dtCV,cbChucVu.Text);
+            int departmentID = Function.GetId("BP", cbBoPhan.Text);
+            int jobtitleID=Function.GetId("BP",cbChucVu.Text);
             DateTime birthdayString = dtNgaySinh.Value.Date;
             sql = @"update Employee_tab
                 set Full_name=@Fullname, 
@@ -302,57 +300,9 @@ namespace DSNV_KANAAN
                 string filePath = op.FileName;
                 DetailsImport detail=new DetailsImport();
                 detail.filePath=filePath;
-                detail.Show();
-
-                // Gọi hàm ImportExcel để đọc dữ liệu từ file Excel vào DataTable
-                //int coll = lstThongTin.Items.Count;
-                //DataTable importedDataTable = Function.ImportExcel(filePath);
-
-                //ketnoi.Open();
-                //foreach (DataRow row in importedDataTable.Rows)
-                //{
-                //    SqlCommand thuchien = new SqlCommand("AddEmployeeData", ketnoi);
-                //    thuchien.CommandType = CommandType.StoredProcedure;
-                //    using (thuchien)
-                //    {
-                //        try
-                //        {
-                //            thuchien.Parameters.AddWithValue("@Emp_code", "");
-                //            thuchien.Parameters.AddWithValue("@Full_name", row[1]);
-                //            thuchien.Parameters.AddWithValue("@Birthday", row[2]);
-                //            thuchien.Parameters.AddWithValue("@LoaiHD", row[3]);
-                //            thuchien.Parameters.AddWithValue("@Department_id", 19);
-                //            thuchien.Parameters.AddWithValue("@Jobtitle_id", 3);
-                //            thuchien.Parameters.AddWithValue("@NgayNhanViec", row[6]);
-                //            thuchien.Parameters.AddWithValue("@NgayKyHopDong",row[7]);
-                //            thuchien.Parameters.AddWithValue("@NgayHetHan",row[8]);
-                //            thuchien.Parameters.AddWithValue("@ThangThamGiaBHXH", row[9]);
-                //            thuchien.Parameters.AddWithValue("@NoiSinh", row[10]);
-                //            thuchien.Parameters.AddWithValue("@NguyenQuan", row[11]);
-                //            thuchien.Parameters.AddWithValue("@CMND", row[12]);
-                //            thuchien.Parameters.AddWithValue("@NgayCap", row[13]);
-                //            thuchien.Parameters.AddWithValue("@NoiCap", row[14]);
-                //            thuchien.Parameters.AddWithValue("@DienThoai", row[15]);
-                //            thuchien.Parameters.AddWithValue("@DiaChi", row[16]);
-                //            thuchien.Parameters.AddWithValue("@GioiTinh", row[17]);
-                //            thuchien.Parameters.AddWithValue("@MaSoThue", row[18]);
-                //            thuchien.Parameters.AddWithValue("@SoTaiKhoan", row[19]);
-                //            thuchien.Parameters.AddWithValue("@SoSoBHXH", row[20]);
-                //            thuchien.Parameters.AddWithValue("@DanToc", 1);
-                //            thuchien.Parameters.AddWithValue("@TonGiao", 1);
-                //            thuchien.Parameters.AddWithValue("@TrinhDo", 1);
-
-                //            thuchien.ExecuteNonQuery();
-
-                //        }
-                //        catch (Exception ex)
-                //        {
-                //            continue;
-                //        }
-                //    }
-                //}
-
-                //ketnoi.Close();
+                detail.ShowDialog();
+                detail = null;
+                this.HienThi();
             }
         }
     }

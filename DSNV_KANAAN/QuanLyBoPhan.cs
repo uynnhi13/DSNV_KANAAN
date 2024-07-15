@@ -24,7 +24,6 @@ namespace DSNV_KANAAN
         SqlDataReader docdulieu;
         string sql;
         int i = 0;
-        DataTable dtBP=new DataTable();
 
         public QuanLyBoPhan()
         {
@@ -35,13 +34,14 @@ namespace DSNV_KANAAN
         {
             HienThiThongTinBoPhan();
             //Function.LoadComboBox(Department, cblstBP, "Department_tab");
-            Function.Load(dtBP ,cblstBP);
+            
         }
 
         private void HienThiThongTinBoPhan()
         {
             lstThongTinBP.Items.Clear();
             Function.GetDetailsBPorCV(lstThongTinBP,"BP");
+            Function.Load(Function.data("BP"), cblstBP);
         }
 
 
@@ -167,7 +167,7 @@ namespace DSNV_KANAAN
         private void btSearch_Click(object sender, EventArgs e)
         {
             lstThongTinNV.Items.Clear();
-            int id=Function.GetId(dtBP, cblstBP.Text);
+            int id=Function.GetId("BP", cblstBP.Text);
 
             ketnoi.Open();
             thuchien = new SqlCommand("GetDetailsKHByDP", ketnoi);

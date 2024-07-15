@@ -103,11 +103,11 @@ namespace DSNV_KANAAN
         private void btSave_Click(object sender, EventArgs e)
         {
             ketnoi.Open();
-            int Department_Id = Function.GetId(Function.data("BP"), cbBoPhan.Text);
-            int Jobtitle_Id = Function.GetId(Function.data("CV"), cbChucVu.Text);
-            int TonGiao_Id = Function.GetId(Function.data("TG"), cbTonGiao.Text);
-            int DanToc_Id = Function.GetId(Function.data("DT") , cbDanToc.Text);
-            int TrinhDo_Id = Function.GetId(Function.data("TD"), cbTrinhDo.Text);
+            int Department_Id = Function.GetId("BP", cbBoPhan.Text);
+            int Jobtitle_Id = Function.GetId("CV", cbChucVu.Text);
+            int TonGiao_Id = Function.GetId("TG", cbTonGiao.Text);
+            int DanToc_Id = Function.GetId("DT" , cbDanToc.Text);
+            int TrinhDo_Id = Function.GetId("TD", cbTrinhDo.Text);
             String MaNV;
 
             if (status == true)

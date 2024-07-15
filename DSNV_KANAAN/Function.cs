@@ -29,20 +29,26 @@ namespace DSNV_KANAAN
         static Function()
         {
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-            LoadTable(dtCV,"Jobtitle_tab");
-            Function.LoadTable(dtBP,"Department_tab");
-            Function.LoadTable(dtTG,"TonGiao");
-            Function.LoadTable(dtDT,"DanToc");
-            Function.LoadTable(dtTD,"TrinhDoDaiHoc");
-            Function.LoadTable(dtDD,"DiaDiem");
-            Function.LoadTable(dtDD,"DiaDiem");
-            Function.LoadTable(dtDD,"DiaDiem");
+            LoadDataTable();
+        }
+
+        public static void LoadDataTable()
+        {
+            Function.LoadTable(dtBP, "Department_tab");
+            Function.LoadTable(dtCV, "Jobtitle_tab");
+            Function.LoadTable(dtTG, "TonGiao");
+            Function.LoadTable(dtDT, "DanToc");
+            Function.LoadTable(dtTD, "TrinhDoDaiHoc");
+            Function.LoadTable(dtDD, "DiaDiem");
+            Function.LoadTable(dtDD, "DiaDiem");
+            Function.LoadTable(dtDD, "DiaDiem");
         }
 
         public static void LoadTable(DataTable dt, string nameData)
         {
             try
             {
+                dt.Clear();
                 ketnoi.Open();
                 SqlDataAdapter da = new SqlDataAdapter("select * from " + nameData, ketnoi);
                 da.Fill(dt);
@@ -90,6 +96,7 @@ namespace DSNV_KANAAN
 
         public static void Load(DataTable dt, ComboBox cb)
         {
+            cb.Items.Clear();
             try
             {
                 foreach (DataRow dr in dt.Rows)
@@ -107,21 +114,74 @@ namespace DSNV_KANAAN
             }
         }
 
-        public static int GetId(DataTable dt,string Name)
+        private static string khoiTao(string dt, string name)
         {
+            switch (dt)
+            {
+                case "BP":
+                    sql = $"Insert into Department_tab(Name) Values (N'{name}')";
+                    break;
+                case "CV":
+                    sql = $"Insert into JobTitle_tab(Name) Values (N'{name}')";
+                    break;
+                case "DT":
+                    sql = $"Insert into DanToc(TenDanToc) Values (N'{name}')";
+                    break;
+                case "TG":
+                    sql = $"Insert into TonGiao(TenTonGiao) Values (N'{name}')";
+                    break;
+                case "TD":
+                    sql = $"Insert into TrinhDo(TenTrinhDo) Values (N'{name}')";
+                    break;
+                case "DD":
+                    sql = $"Insert into DiaDiem(TenDiaDiem) Values (N'{name}')";
+                    break;
+                default:
+                    throw new ArgumentException("Invalid DataTable name");
+            }
+            return sql;
+        }
+
+        public static int GetId(string key,string Name)
+        {
+            LoadDataTable();
+            DataTable dt = data(key);
             if (dt == null)
             {
                 throw new InvalidOperationException("DataTable dt chưa được khởi tạo.");
             }
 
-            foreach (DataRow d in dt.Rows)
+            int id = -1;
+
+            while (id == -1)
             {
-                if (d[1].ToString() == Name)
+                foreach (DataRow d in dt.Rows)
                 {
-                    return Convert.ToInt32(d[0]);
+                    if (d[1].ToString() == Name)
+                    {
+                        id= Convert.ToInt32(d[0]);
+                    }
                 }
+
+                if(id == -1)
+                {
+                    DialogResult dialog = MessageBox.Show(Name + " Chưa được khởi tạo, Bạn có muốn khởi tạo không? ", "Nhắc Nhở", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (dialog == DialogResult.Yes)
+                    {
+                        ketnoi.Open();
+                        sql = khoiTao(key, Name);
+                        thuchien = new SqlCommand(sql, ketnoi);
+                        thuchien.ExecuteNonQuery();
+                        ketnoi.Close();
+                    }
+                    else { break; }
+
+                    LoadDataTable();
+                }
+
             }
-            return -1;
+
+            return id;
         }
 
 
@@ -241,18 +301,14 @@ namespace DSNV_KANAAN
                 {
                     var value = listViewItem.SubItems[col].Text;
 
-                    DateTime tempDate;
-                    if (DateTime.TryParseExact(value, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out tempDate))
+                    // Kiểm tra nếu giá trị là chuỗi
+                    if (value is string)
                     {
-                        arr[item, col] = tempDate;
-                        if (!dateColumns.Contains(col))
-                        {
-                            dateColumns.Add(col);
-                        }
+                        arr[item, col] = "'"+value; // Nếu là chuỗi, giữ nguyên
                     }
                     else
                     {
-                        arr[item, col] = value; // Nếu không thể chuyển đổi, giữ nguyên chuỗi
+                        arr[item, col] = Convert.ToDateTime(value); // Nếu không, chuyển đổi sang DateTime
                     }
                 }
             }

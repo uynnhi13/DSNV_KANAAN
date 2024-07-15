@@ -24,18 +24,18 @@ namespace DSNV_KANAAN
         SqlDataReader docdulieu;
         string sql;
         int i = 0;
-        DataTable dtCV=new DataTable();
 
         private void QuanLyChucVu_Load(object sender, EventArgs e)
         {
             HienThiThongTinChucVu();
-            Function.Load(dtCV, cblstCV);
         }
 
         private void HienThiThongTinChucVu()
         {
             lstThongTinCV.Items.Clear();
             Function.GetDetailsBPorCV(lstThongTinCV,"CV");
+            Function.Load(Function.data("CV"), cblstCV);
+            Function.LoadDataTable();
         }
 
         private void btAdd_Click(object sender, EventArgs e)
@@ -140,7 +140,7 @@ namespace DSNV_KANAAN
         private void btSearch_Click(object sender, EventArgs e)
         {
             lstThongTinKH.Items.Clear();
-            int id = Function.GetId(dtCV, cblstCV.Text);
+            int id = Function.GetId("CV", cblstCV.Text);
 
             ketnoi.Open();
             thuchien = new SqlCommand("GetDetailsKHByCV", ketnoi);
