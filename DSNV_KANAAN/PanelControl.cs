@@ -34,14 +34,6 @@ namespace DSNV_KANAAN
 
         private void nhanSuToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MenuItem_Click(sender, e);
-            this.pnlContent.Controls.Clear();
-            QuanLyNhanSu ns = new QuanLyNhanSu();
-            ns.TopLevel = false;
-            ns.AutoScroll = true;
-            ns.Dock = DockStyle.Fill;
-            this.pnlContent.Controls.Add(ns);
-            ns.Show();
         }
 
 
@@ -83,6 +75,18 @@ namespace DSNV_KANAAN
             cv.Dock = DockStyle.Fill;
             this.pnlContent.Controls.Add(cv);
             cv.Show();
+        }
+
+        private void nhânViênToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            nhanSuToolStripMenuItem_Click((object) sender, e);
+            this.pnlContent.Controls.Clear();
+            QuanLyNhanSu ns = new QuanLyNhanSu();
+            ns.TopLevel = false;
+            ns.AutoScroll = true;
+            ns.Dock = DockStyle.Fill;
+            this.pnlContent.Controls.Add(ns);
+            ns.Show();
         }
     }
 }

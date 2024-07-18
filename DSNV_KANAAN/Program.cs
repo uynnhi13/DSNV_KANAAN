@@ -16,7 +16,7 @@ namespace DSNV_KANAAN
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new PanelControl());
+            Application.Run(new frmDangNhap());
         }
     }
 }

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Windows.Media.Animation;
 
 namespace DSNV_KANAAN
 {
@@ -264,12 +265,20 @@ namespace DSNV_KANAAN
 
         private void Refresh()
         {
+            foreach(var item in groupBox1.Controls)
+            {
+                TextBox text= item as TextBox;
+                ComboBox comboBox= item as ComboBox;
+                if(text!= null)
+                {
+                    text.Clear();
+                }
+                if (comboBox != null)
+                {
+                    comboBox.Text = "";
+                }
+            }
             dtNgaySinh.Value = DateTime.Now;
-            lbMaNV.Text = "";
-            tbHoTen.Text = "";
-            cbBoPhan.Text = "";
-            cbLoaiHD.Text = "";
-            cbChucVu.Text = "";
             HienThi();
         }
 
@@ -303,6 +312,52 @@ namespace DSNV_KANAAN
                 detail.ShowDialog();
                 detail = null;
                 this.HienThi();
+            }
+        }
+
+        private void btTaiKhoan_Click(object sender, EventArgs e)
+        {
+
+            TaiKhoan tk = new TaiKhoan();
+            if (lbMaNV.Text == "")
+            {
+                MessageBox.Show("Không lấy được thông tin nhân viên");
+            }
+            else
+            {
+                ketnoi.Open();
+
+                using (thuchien)
+                {
+                    try
+                    {
+                        thuchien = new SqlCommand("CAPQUYEN", ketnoi);
+                        thuchien.CommandType = CommandType.StoredProcedure;
+                        thuchien.Parameters.AddWithValue("@MaNV", lbMaNV.Text);
+                        using (docdulieu = thuchien.ExecuteReader())
+                        {
+                            if (docdulieu.HasRows)
+                            {
+                                while (docdulieu.Read())
+                                {
+                                    tk.tendangnhap = docdulieu["TenDangNhap"].ToString();
+                                    tk.matkhau = docdulieu["MatKhau"].ToString();
+                                    tk.ShowDialog();
+                                }
+                            }
+                        }
+
+                    }
+                    catch (SqlException ex)
+                    {
+                        DialogResult dlg = MessageBox.Show(ex.Message, "Thông Báo", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                        if (dlg == DialogResult.Yes)
+                        {
+                            tk.ShowDialog();
+                        }
+                    }
+                }
+                ketnoi.Close();
             }
         }
     }

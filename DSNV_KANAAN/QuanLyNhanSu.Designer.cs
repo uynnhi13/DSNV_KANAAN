@@ -78,6 +78,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btImport = new System.Windows.Forms.Button();
             this.btexportE = new System.Windows.Forms.Button();
+            this.btTaiKhoan = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -86,6 +87,7 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.btTaiKhoan);
             this.groupBox1.Controls.Add(this.lbMaNV);
             this.groupBox1.Controls.Add(this.addMore);
             this.groupBox1.Controls.Add(this.cbChucVu);
@@ -526,6 +528,18 @@
             this.btexportE.UseVisualStyleBackColor = true;
             this.btexportE.Click += new System.EventHandler(this.btexportE_Click);
             // 
+            // btTaiKhoan
+            // 
+            this.btTaiKhoan.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btTaiKhoan.Font = new System.Drawing.Font("Segoe UI Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btTaiKhoan.Location = new System.Drawing.Point(1310, 160);
+            this.btTaiKhoan.Name = "btTaiKhoan";
+            this.btTaiKhoan.Size = new System.Drawing.Size(147, 31);
+            this.btTaiKhoan.TabIndex = 17;
+            this.btTaiKhoan.Text = "Tài Khoản";
+            this.btTaiKhoan.UseVisualStyleBackColor = true;
+            this.btTaiKhoan.Click += new System.EventHandler(this.btTaiKhoan_Click);
+            // 
             // QuanLyNhanSu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -602,6 +616,7 @@
         private System.Windows.Forms.Button btexportE;
         private System.Windows.Forms.TextBox lbMaNV;
         private System.Windows.Forms.Button btImport;
+        private System.Windows.Forms.Button btTaiKhoan;
     }
 }
 
