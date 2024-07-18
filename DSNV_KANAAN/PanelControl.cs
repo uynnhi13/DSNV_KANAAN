@@ -88,5 +88,17 @@ namespace DSNV_KANAAN
             this.pnlContent.Controls.Add(ns);
             ns.Show();
         }
+
+        private void tàiKhoảnToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            nhanSuToolStripMenuItem_Click((object)sender, e);
+            this.pnlContent.Controls.Clear();
+            frmLstTaiKhoan taiKhoan = new frmLstTaiKhoan();
+            taiKhoan.TopLevel = false;
+            taiKhoan.AutoScroll = true;
+            taiKhoan.Dock = DockStyle.Fill;
+            this.pnlContent.Controls.Add(taiKhoan);
+            taiKhoan.Show();
+        }
     }
 }

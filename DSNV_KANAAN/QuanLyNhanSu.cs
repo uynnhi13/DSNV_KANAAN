@@ -334,6 +334,8 @@ namespace DSNV_KANAAN
                         thuchien = new SqlCommand("CAPQUYEN", ketnoi);
                         thuchien.CommandType = CommandType.StoredProcedure;
                         thuchien.Parameters.AddWithValue("@MaNV", lbMaNV.Text);
+                        thuchien.ExecuteNonQuery();
+
                         using (docdulieu = thuchien.ExecuteReader())
                         {
                             if (docdulieu.HasRows)
@@ -342,6 +344,7 @@ namespace DSNV_KANAAN
                                 {
                                     tk.tendangnhap = docdulieu["TenDangNhap"].ToString();
                                     tk.matkhau = docdulieu["MatKhau"].ToString();
+                                    tk.manv = lbMaNV.Text;
                                     tk.ShowDialog();
                                 }
                             }
@@ -353,6 +356,7 @@ namespace DSNV_KANAAN
                         DialogResult dlg = MessageBox.Show(ex.Message, "Thông Báo", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                         if (dlg == DialogResult.Yes)
                         {
+                            tk.manv = lbMaNV.Text;
                             tk.ShowDialog();
                         }
                     }
