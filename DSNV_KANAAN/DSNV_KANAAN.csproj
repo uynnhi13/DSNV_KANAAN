@@ -147,6 +147,12 @@
     <Compile Include="QLNS_ThemThongTin.Designer.cs">
       <DependentUpon>QLNS_ThemThongTin.cs</DependentUpon>
     </Compile>
+    <Compile Include="QLPhanQuyen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QLPhanQuyen.Designer.cs">
+      <DependentUpon>QLPhanQuyen.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuanLyBoPhan.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -197,6 +203,9 @@
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="QLNS_ThemThongTin.resx">
       <DependentUpon>QLNS_ThemThongTin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QLPhanQuyen.resx">
+      <DependentUpon>QLPhanQuyen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="QuanLyBoPhan.resx">
       <DependentUpon>QuanLyBoPhan.cs</DependentUpon>

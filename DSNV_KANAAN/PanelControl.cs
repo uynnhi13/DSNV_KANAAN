@@ -36,10 +36,13 @@ namespace DSNV_KANAAN
         {
         }
 
+        private void hệThốngToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+        }
+
 
         private void boPhanToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MenuItem_Click(sender, e);
             this.pnlContent.Controls.Clear();
             QuanLyBoPhan bp=new QuanLyBoPhan();
             bp.TopLevel = false;
@@ -49,25 +52,24 @@ namespace DSNV_KANAAN
             bp.Show();
         }
 
-        private void MenuItem_Click(object sender, EventArgs e)
-        {
-            // Đặt lại màu nền cho tất cả các mục
-            foreach (ToolStripMenuItem item in menuStrip1.Items)
-            {
-                item.BackColor = SystemColors.Control;
-            }
+        //private void MenuItem_Click(object sender, EventArgs e)
+        //{
+        //    // Đặt lại màu nền cho tất cả các mục
+        //    foreach (ToolStripMenuItem item in menuStrip1.Items)
+        //    {
+        //        item.BackColor = SystemColors.Control;
+        //    }
 
-            // Đặt màu nền cho mục được chọn
-            ToolStripMenuItem clickedItem = sender as ToolStripMenuItem;
-            if (clickedItem != null)
-            {
-                clickedItem.BackColor = Color.LightBlue;
-            }
-        }
+        //    // Đặt màu nền cho mục được chọn
+        //    ToolStripMenuItem clickedItem = sender as ToolStripMenuItem;
+        //    if (clickedItem != null)
+        //    {
+        //        clickedItem.BackColor = Color.LightBlue;
+        //    }
+        //}
 
         private void chứcVụToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MenuItem_Click(sender, e);
             this.pnlContent.Controls.Clear();
             QuanLyChucVu cv=new QuanLyChucVu();
             cv.TopLevel = false;
@@ -79,7 +81,6 @@ namespace DSNV_KANAAN
 
         private void nhânViênToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            nhanSuToolStripMenuItem_Click((object) sender, e);
             this.pnlContent.Controls.Clear();
             QuanLyNhanSu ns = new QuanLyNhanSu();
             ns.TopLevel = false;
@@ -91,7 +92,6 @@ namespace DSNV_KANAAN
 
         private void tàiKhoảnToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            nhanSuToolStripMenuItem_Click((object)sender, e);
             this.pnlContent.Controls.Clear();
             frmLstTaiKhoan taiKhoan = new frmLstTaiKhoan();
             taiKhoan.TopLevel = false;
@@ -100,5 +100,17 @@ namespace DSNV_KANAAN
             this.pnlContent.Controls.Add(taiKhoan);
             taiKhoan.Show();
         }
+
+        private void quyềnTruyCậpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            pnlContent.Controls.Clear();
+            QLPhanQuyen qLPhanQuyen = new QLPhanQuyen();
+            qLPhanQuyen.TopLevel = false;
+            qLPhanQuyen.AutoScroll=true;
+            qLPhanQuyen.Dock=DockStyle.Fill;
+            this.pnlContent.Controls.Add(qLPhanQuyen);
+            qLPhanQuyen.Show();
+        }
+
     }
 }
