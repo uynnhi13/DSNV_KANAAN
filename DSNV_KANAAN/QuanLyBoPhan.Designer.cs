@@ -121,7 +121,6 @@
             this.cblstBP.Name = "cblstBP";
             this.cblstBP.Size = new System.Drawing.Size(304, 33);
             this.cblstBP.TabIndex = 3;
-            this.cblstBP.SelectedIndexChanged += new System.EventHandler(this.cblstBP_SelectedIndexChanged);
             // 
             // btSearch
             // 
@@ -144,7 +143,6 @@
             this.groupBox1.Size = new System.Drawing.Size(872, 525);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // groupBox2
             // 

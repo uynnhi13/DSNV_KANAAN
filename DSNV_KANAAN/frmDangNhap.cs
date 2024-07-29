@@ -23,7 +23,7 @@ namespace DSNV_KANAAN
             InitializeComponent();
         }
 
-        private bool KiemTraDangNhap(string tenDangNhap, string pass)
+        private int KiemTraDangNhap(string tenDangNhap, string pass)
         {
             ketnoi.Open();
 
@@ -33,16 +33,10 @@ namespace DSNV_KANAAN
             thuchien.Parameters.AddWithValue("@tendangnhap", txTenDangNhap.Text);
             thuchien.Parameters.AddWithValue("@matkhau", txPass.Text);
 
-            object ketqua = thuchien.ExecuteScalar();
+            object role = thuchien.ExecuteScalar();
+            return Convert.ToInt32(role);
+
             ketnoi.Close();
-
-            if (ketnoi!=null && Convert.ToInt32(ketqua)==1)
-            {
-                return true;
-            }
-            else return false;
-
-            
         }
 
         private void XtraForm1_Load(object sender, EventArgs e)
@@ -57,7 +51,8 @@ namespace DSNV_KANAAN
 
         private void btDangNhap_Click(object sender, EventArgs e)
         {
-            if (KiemTraDangNhap(txTenDangNhap.Text,txPass.Text))
+            PhanQuyen.userSession = KiemTraDangNhap(txTenDangNhap.Text, txPass.Text);
+            if (PhanQuyen.userSession != -1)
             {
                 this.Hide();
                 PanelControl panel= new PanelControl();

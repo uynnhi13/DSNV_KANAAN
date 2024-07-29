@@ -1,4 +1,4 @@
-﻿using DevExpress.XtraBars;
+﻿using DevExpress.XtraEditors;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,14 +11,14 @@ using System.Windows.Forms;
 
 namespace DSNV_KANAAN
 {
-    public partial class frmMain : DevExpress.XtraBars.Ribbon.RibbonForm
+    public partial class NoPermission : DevExpress.XtraEditors.XtraForm
     {
-        public frmMain()
+        public NoPermission()
         {
             InitializeComponent();
         }
 
-        private void frmMain_Load(object sender, EventArgs e)
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
 
         }

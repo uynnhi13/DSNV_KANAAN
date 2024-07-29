@@ -64,7 +64,6 @@
             this.hệThốngToolStripMenuItem.Name = "hệThốngToolStripMenuItem";
             this.hệThốngToolStripMenuItem.Size = new System.Drawing.Size(118, 32);
             this.hệThốngToolStripMenuItem.Text = "Hệ Thống";
-            this.hệThốngToolStripMenuItem.Click += new System.EventHandler(this.hệThốngToolStripMenuItem_Click);
             // 
             // quyềnTruyCậpToolStripMenuItem
             // 
@@ -85,7 +84,6 @@
             this.nhanSuToolStripMenuItem.Name = "nhanSuToolStripMenuItem";
             this.nhanSuToolStripMenuItem.Size = new System.Drawing.Size(107, 32);
             this.nhanSuToolStripMenuItem.Text = "Nhân Sự";
-            this.nhanSuToolStripMenuItem.Click += new System.EventHandler(this.nhanSuToolStripMenuItem_Click);
             // 
             // nhânViênToolStripMenuItem
             // 
@@ -136,7 +134,6 @@
             this.pnlContent.Name = "pnlContent";
             this.pnlContent.Size = new System.Drawing.Size(1792, 887);
             this.pnlContent.TabIndex = 2;
-            this.pnlContent.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlContent_Paint);
             // 
             // PanelControl
             // 
@@ -150,7 +147,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultBounds;
             this.Text = "PanelControl";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.PanelControl_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

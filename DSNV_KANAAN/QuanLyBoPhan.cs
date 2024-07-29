@@ -44,22 +44,6 @@ namespace DSNV_KANAAN
             Function.Load(Function.data("BP"), cblstBP);
         }
 
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
         //SỬA BỘ PHẬN
         private void button4_Click(object sender, EventArgs e)
         {
@@ -188,11 +172,6 @@ namespace DSNV_KANAAN
             }
 
             ketnoi.Close();
-        }
-
-        private void cblstBP_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
         }
 
         private void Refresh()

@@ -68,6 +68,9 @@
     <Reference Include="EPPlus.System.Drawing, Version=6.1.1.0, Culture=neutral, PublicKeyToken=2308d35469c9bac0, processorArchitecture=MSIL">
       <HintPath>..\packages\EPPlus.System.Drawing.6.1.1\lib\net462\EPPlus.System.Drawing.dll</HintPath>
     </Reference>
+    <Reference Include="Guna.UI2, Version=2.0.4.6, Culture=neutral, PublicKeyToken=8b9d14aa5142e261, processorArchitecture=MSIL">
+      <HintPath>..\packages\Guna.UI2.WinForms.2.0.4.6\lib\net472\Guna.UI2.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.IO.RecyclableMemoryStream, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.IO.RecyclableMemoryStream.3.0.0\lib\netstandard2.0\Microsoft.IO.RecyclableMemoryStream.dll</HintPath>
     </Reference>
@@ -88,6 +91,8 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
     </Reference>
@@ -99,6 +104,7 @@
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -122,25 +128,32 @@
     <Compile Include="frmLstTaiKhoan.Designer.cs">
       <DependentUpon>frmLstTaiKhoan.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmMain.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmMain.Designer.cs">
-      <DependentUpon>frmMain.cs</DependentUpon>
-    </Compile>
     <Compile Include="frmNhanSu.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmNhanSu.Designer.cs">
       <DependentUpon>frmNhanSu.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmTaoMoiPhanQuyen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTaoMoiPhanQuyen.Designer.cs">
+      <DependentUpon>frmTaoMoiPhanQuyen.cs</DependentUpon>
+    </Compile>
     <Compile Include="Function.cs" />
+    <Compile Include="NoPermission.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NoPermission.Designer.cs">
+      <DependentUpon>NoPermission.cs</DependentUpon>
+    </Compile>
     <Compile Include="PanelControl.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PanelControl.Designer.cs">
       <DependentUpon>PanelControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="PhanQuyen.cs" />
     <Compile Include="QLNS_ThemThongTin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -191,11 +204,14 @@
     <EmbeddedResource Include="frmLstTaiKhoan.resx">
       <DependentUpon>frmLstTaiKhoan.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmMain.resx">
-      <DependentUpon>frmMain.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmNhanSu.resx">
       <DependentUpon>frmNhanSu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTaoMoiPhanQuyen.resx">
+      <DependentUpon>frmTaoMoiPhanQuyen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NoPermission.resx">
+      <DependentUpon>NoPermission.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PanelControl.resx">
       <DependentUpon>PanelControl.cs</DependentUpon>
@@ -224,6 +240,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="frmDangNhap.resx">
       <DependentUpon>frmDangNhap.cs</DependentUpon>
@@ -256,6 +273,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\teamwork.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

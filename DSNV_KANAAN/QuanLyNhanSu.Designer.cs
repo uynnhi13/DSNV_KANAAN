@@ -110,7 +110,6 @@
             this.groupBox1.Size = new System.Drawing.Size(1671, 307);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // lbMaNV
             // 
@@ -197,7 +196,6 @@
             this.cbLoaiHD.Name = "cbLoaiHD";
             this.cbLoaiHD.Size = new System.Drawing.Size(336, 36);
             this.cbLoaiHD.TabIndex = 9;
-            this.cbLoaiHD.SelectedIndexChanged += new System.EventHandler(this.cbLoaiHD_SelectedIndexChanged);
             // 
             // dtNgaySinh
             // 
@@ -209,7 +207,6 @@
             this.dtNgaySinh.Size = new System.Drawing.Size(336, 34);
             this.dtNgaySinh.TabIndex = 8;
             this.dtNgaySinh.Value = new System.DateTime(2024, 7, 26, 0, 0, 0, 0);
-            this.dtNgaySinh.ValueChanged += new System.EventHandler(this.dtNgaySinh_ValueChanged);
             // 
             // tbHoTen
             // 
@@ -278,7 +275,6 @@
             this.label1.Size = new System.Drawing.Size(147, 28);
             this.label1.TabIndex = 0;
             this.label1.Text = "Mã Nhân Viên";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // btXoa
             // 
@@ -301,7 +297,6 @@
             this.label7.Size = new System.Drawing.Size(489, 38);
             this.label7.TabIndex = 12;
             this.label7.Text = "Quản Lý Nhân Sự Công Ty KANAAN";
-            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // button1
             // 
@@ -366,7 +361,6 @@
             this.lstThongTin.TabIndex = 8;
             this.lstThongTin.UseCompatibleStateImageBehavior = false;
             this.lstThongTin.View = System.Windows.Forms.View.Details;
-            this.lstThongTin.SelectedIndexChanged += new System.EventHandler(this.lstThongTin_SelectedIndexChanged);
             this.lstThongTin.Click += new System.EventHandler(this.lstThongTin_Click);
             // 
             // columnHeader1
@@ -503,7 +497,6 @@
             this.groupBox2.TabIndex = 9;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Thông Tin Nhân Viên";
-            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
             // btImport
             // 

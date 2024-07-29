@@ -26,6 +26,7 @@ namespace DSNV_KANAAN
         SqlCommand thuchien;
         SqlDataReader docdulieu;
         int i = 0;
+        int idKhuVuc = 2;
 
 
         private void Form1_Load(object sender, EventArgs e)
@@ -36,44 +37,47 @@ namespace DSNV_KANAAN
 
         public void HienThi()
         {
-            lstThongTin.Items.Clear();
-            ketnoi.Open();
-            thuchien = new SqlCommand("GetEmployeeData",ketnoi);
-            thuchien.CommandType = CommandType.StoredProcedure;
-            docdulieu = thuchien.ExecuteReader();
-            i = 0;
-            while(docdulieu.Read())
+            if (PhanQuyen.CheckPhanQuyen("Read", idKhuVuc))
             {
-                lstThongTin.Items.Add(docdulieu[0].ToString());
-                lstThongTin.Items[i].SubItems.Add(docdulieu[1].ToString());
-                lstThongTin.Items[i].SubItems.Add(DateTime.Parse(docdulieu[2].ToString()).ToShortDateString());
-                lstThongTin.Items[i].SubItems.Add(docdulieu[3].ToString());
-                lstThongTin.Items[i].SubItems.Add(docdulieu[4].ToString());
-                lstThongTin.Items[i].SubItems.Add(docdulieu[5].ToString());
-                lstThongTin.Items[i].SubItems.Add(DateTime.Parse(docdulieu[6].ToString()).ToShortDateString());
-                lstThongTin.Items[i].SubItems.Add(DateTime.Parse(docdulieu[7].ToString()).ToShortDateString());
-                lstThongTin.Items[i].SubItems.Add(DateTime.Parse(docdulieu[8].ToString()).ToShortDateString());
-                lstThongTin.Items[i].SubItems.Add(DateTime.Parse(docdulieu[9].ToString()).ToShortDateString());
-                lstThongTin.Items[i].SubItems.Add(docdulieu[10].ToString());
-                lstThongTin.Items[i].SubItems.Add(docdulieu[11].ToString());
-                lstThongTin.Items[i].SubItems.Add(docdulieu[12].ToString());
-                lstThongTin.Items[i].SubItems.Add(DateTime.Parse(docdulieu[13].ToString()).ToShortDateString());
-                lstThongTin.Items[i].SubItems.Add(docdulieu[14].ToString());
-                lstThongTin.Items[i].SubItems.Add(docdulieu[15].ToString());
-                lstThongTin.Items[i].SubItems.Add(docdulieu[16].ToString());
-                lstThongTin.Items[i].SubItems.Add(docdulieu[17].ToString());
-                lstThongTin.Items[i].SubItems.Add(docdulieu[18].ToString());
-                lstThongTin.Items[i].SubItems.Add(docdulieu[19].ToString());
-                lstThongTin.Items[i].SubItems.Add(docdulieu[20].ToString());
-                lstThongTin.Items[i].SubItems.Add(docdulieu[21].ToString());
-                lstThongTin.Items[i].SubItems.Add(docdulieu[22].ToString());
-                lstThongTin.Items[i].SubItems.Add(docdulieu[23].ToString());
+                lstThongTin.Items.Clear();
+                ketnoi.Open();
+                thuchien = new SqlCommand("GetEmployeeData", ketnoi);
+                thuchien.CommandType = CommandType.StoredProcedure;
+                docdulieu = thuchien.ExecuteReader();
+                i = 0;
+                while (docdulieu.Read())
+                {
+                    lstThongTin.Items.Add(docdulieu[0].ToString());
+                    lstThongTin.Items[i].SubItems.Add(docdulieu[1].ToString());
+                    lstThongTin.Items[i].SubItems.Add(DateTime.Parse(docdulieu[2].ToString()).ToShortDateString());
+                    lstThongTin.Items[i].SubItems.Add(docdulieu[3].ToString());
+                    lstThongTin.Items[i].SubItems.Add(docdulieu[4].ToString());
+                    lstThongTin.Items[i].SubItems.Add(docdulieu[5].ToString());
+                    lstThongTin.Items[i].SubItems.Add(DateTime.Parse(docdulieu[6].ToString()).ToShortDateString());
+                    lstThongTin.Items[i].SubItems.Add(DateTime.Parse(docdulieu[7].ToString()).ToShortDateString());
+                    lstThongTin.Items[i].SubItems.Add(DateTime.Parse(docdulieu[8].ToString()).ToShortDateString());
+                    lstThongTin.Items[i].SubItems.Add(DateTime.Parse(docdulieu[9].ToString()).ToShortDateString());
+                    lstThongTin.Items[i].SubItems.Add(docdulieu[10].ToString());
+                    lstThongTin.Items[i].SubItems.Add(docdulieu[11].ToString());
+                    lstThongTin.Items[i].SubItems.Add(docdulieu[12].ToString());
+                    lstThongTin.Items[i].SubItems.Add(DateTime.Parse(docdulieu[13].ToString()).ToShortDateString());
+                    lstThongTin.Items[i].SubItems.Add(docdulieu[14].ToString());
+                    lstThongTin.Items[i].SubItems.Add(docdulieu[15].ToString());
+                    lstThongTin.Items[i].SubItems.Add(docdulieu[16].ToString());
+                    lstThongTin.Items[i].SubItems.Add(docdulieu[17].ToString());
+                    lstThongTin.Items[i].SubItems.Add(docdulieu[18].ToString());
+                    lstThongTin.Items[i].SubItems.Add(docdulieu[19].ToString());
+                    lstThongTin.Items[i].SubItems.Add(docdulieu[20].ToString());
+                    lstThongTin.Items[i].SubItems.Add(docdulieu[21].ToString());
+                    lstThongTin.Items[i].SubItems.Add(docdulieu[22].ToString());
+                    lstThongTin.Items[i].SubItems.Add(docdulieu[23].ToString());
 
-                i++;
+                    i++;
+                }
+                lstThongTin.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+                lstThongTin.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+                ketnoi.Close();
             }
-            lstThongTin.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
-            lstThongTin.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
-            ketnoi.Close();
         }
 
         private void LoadThongTin()
@@ -83,51 +87,23 @@ namespace DSNV_KANAAN
         }
 
 
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
 
         //Thêm Nhân viên
         private void button1_Click(object sender, EventArgs e)
         {
-            QLNS_ThemThongTin qLNS_ThemThongTin = new QLNS_ThemThongTin();
-            qLNS_ThemThongTin.MaNV = "";
-            qLNS_ThemThongTin.ShowDialog();
-            qLNS_ThemThongTin = null;
-            this.HienThi();
-            this.Refresh();
-        }
-
-        
-        private void groupBox2_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lstThongTin_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cbLoaiHD_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dtNgaySinh_ValueChanged(object sender, EventArgs e)
-        {
-
+            if (PhanQuyen.CheckPhanQuyen("Read", 2))
+            {
+                QLNS_ThemThongTin qLNS_ThemThongTin = new QLNS_ThemThongTin();
+                qLNS_ThemThongTin.MaNV = "";
+                qLNS_ThemThongTin.ShowDialog();
+                qLNS_ThemThongTin = null;
+                this.HienThi();
+                this.Refresh();
+            }
+            else
+            {
+                button1.Visible = false;
+            }
         }
 
         //Khi bấm vào sẽ hiện thông tin nhân viên lên.
@@ -237,11 +213,6 @@ namespace DSNV_KANAAN
                 i++;
             }
             ketnoi.Close();
-
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
 
         }
 

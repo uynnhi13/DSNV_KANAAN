@@ -17,99 +17,105 @@ namespace DSNV_KANAAN
             InitializeComponent();
         }
 
-        private void PanelControl_Load(object sender, EventArgs e)
-        {
-            QuanLyNhanSu ns=new QuanLyNhanSu();
-            ns.TopLevel = false;
-            ns.AutoScroll = true;
-            ns.Dock = DockStyle.Fill;
-            this.pnlContent.Controls.Add(ns);
-            ns.Show();
-        }
-
-        private void pnlContent_Paint(object sender, PaintEventArgs e)
-        {
-          
-        }
-
-        private void nhanSuToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void hệThốngToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-        }
-
-
         private void boPhanToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.pnlContent.Controls.Clear();
-            QuanLyBoPhan bp=new QuanLyBoPhan();
-            bp.TopLevel = false;
-            bp.AutoScroll = true;
-            bp.Dock = DockStyle.Fill;
-            this.pnlContent.Controls.Add(bp);
-            bp.Show();
+            if (PhanQuyen.CheckPhanQuyen("Read", 3))
+            {
+                this.pnlContent.Controls.Clear();
+                QuanLyBoPhan bp = new QuanLyBoPhan();
+                bp.TopLevel = false;
+                bp.AutoScroll = true;
+                bp.Dock = DockStyle.Fill;
+                this.pnlContent.Controls.Add(bp);
+                bp.Show();
+            }
+            else
+            {
+                HienThiNoPer();
+            }
         }
 
-        //private void MenuItem_Click(object sender, EventArgs e)
-        //{
-        //    // Đặt lại màu nền cho tất cả các mục
-        //    foreach (ToolStripMenuItem item in menuStrip1.Items)
-        //    {
-        //        item.BackColor = SystemColors.Control;
-        //    }
-
-        //    // Đặt màu nền cho mục được chọn
-        //    ToolStripMenuItem clickedItem = sender as ToolStripMenuItem;
-        //    if (clickedItem != null)
-        //    {
-        //        clickedItem.BackColor = Color.LightBlue;
-        //    }
-        //}
+        private void HienThiNoPer()
+        {
+            this.pnlContent.Controls.Clear();
+            NoPermission np=new NoPermission();
+            np.TopLevel = false;
+            np.AutoScroll = true;
+            np.Dock = DockStyle.Fill;
+            this.pnlContent.Controls.Add(np);
+            np.Show();
+        }
 
         private void chứcVụToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.pnlContent.Controls.Clear();
-            QuanLyChucVu cv=new QuanLyChucVu();
-            cv.TopLevel = false;
-            cv.AutoScroll = true;
-            cv.Dock = DockStyle.Fill;
-            this.pnlContent.Controls.Add(cv);
-            cv.Show();
+            if (PhanQuyen.CheckPhanQuyen("Read", 4))
+            {
+                this.pnlContent.Controls.Clear();
+                QuanLyChucVu cv = new QuanLyChucVu();
+                cv.TopLevel = false;
+                cv.AutoScroll = true;
+                cv.Dock = DockStyle.Fill;
+                this.pnlContent.Controls.Add(cv);
+                cv.Show();
+            }
+            else
+            {
+                HienThiNoPer();
+            }
         }
 
         private void nhânViênToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.pnlContent.Controls.Clear();
-            QuanLyNhanSu ns = new QuanLyNhanSu();
-            ns.TopLevel = false;
-            ns.AutoScroll = true;
-            ns.Dock = DockStyle.Fill;
-            this.pnlContent.Controls.Add(ns);
-            ns.Show();
+            if (PhanQuyen.CheckPhanQuyen("Read", 2))
+            {
+                this.pnlContent.Controls.Clear();
+                QuanLyNhanSu ns = new QuanLyNhanSu();
+                ns.TopLevel = false;
+                ns.AutoScroll = true;
+                ns.Dock = DockStyle.Fill;
+                this.pnlContent.Controls.Add(ns);
+                ns.Show();
+            }
+            else
+            {
+                HienThiNoPer();
+            }
         }
 
         private void tàiKhoảnToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.pnlContent.Controls.Clear();
-            frmLstTaiKhoan taiKhoan = new frmLstTaiKhoan();
-            taiKhoan.TopLevel = false;
-            taiKhoan.AutoScroll = true;
-            taiKhoan.Dock = DockStyle.Fill;
-            this.pnlContent.Controls.Add(taiKhoan);
-            taiKhoan.Show();
+            if (PhanQuyen.CheckPhanQuyen("Read", 1))
+            {
+                this.pnlContent.Controls.Clear();
+                frmLstTaiKhoan taiKhoan = new frmLstTaiKhoan();
+                taiKhoan.TopLevel = false;
+                taiKhoan.AutoScroll = true;
+                taiKhoan.Dock = DockStyle.Fill;
+                this.pnlContent.Controls.Add(taiKhoan);
+                taiKhoan.Show();
+            }
+            else
+            {
+                HienThiNoPer();
+            }
         }
 
         private void quyềnTruyCậpToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            pnlContent.Controls.Clear();
-            QLPhanQuyen qLPhanQuyen = new QLPhanQuyen();
-            qLPhanQuyen.TopLevel = false;
-            qLPhanQuyen.AutoScroll=true;
-            qLPhanQuyen.Dock=DockStyle.Fill;
-            this.pnlContent.Controls.Add(qLPhanQuyen);
-            qLPhanQuyen.Show();
+            if (PhanQuyen.CheckPhanQuyen("Read", 5))
+            {
+                pnlContent.Controls.Clear();
+                QLPhanQuyen qLPhanQuyen = new QLPhanQuyen();
+                qLPhanQuyen.TopLevel = false;
+                qLPhanQuyen.AutoScroll = true;
+                qLPhanQuyen.Dock = DockStyle.Fill;
+                this.pnlContent.Controls.Add(qLPhanQuyen);
+                qLPhanQuyen.Show();
+            }
+            else
+            {
+                HienThiNoPer();
+            }
         }
 
     }
