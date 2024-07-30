@@ -37,6 +37,7 @@
             this.guna2GradientTileButton2 = new Guna.UI2.WinForms.Guna2GradientTileButton();
             this.btNhanSu = new Guna.UI2.WinForms.Guna2GradientTileButton();
             this.guna2GradientPanel2 = new Guna.UI2.WinForms.Guna2GradientPanel();
+            this.btDetailsNV = new Guna.UI2.WinForms.Guna2TileButton();
             this.btlstEmp = new Guna.UI2.WinForms.Guna2TileButton();
             this.guna2ShadowPanel1 = new Guna.UI2.WinForms.Guna2ShadowPanel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -202,6 +203,7 @@
             // guna2GradientPanel2
             // 
             this.guna2GradientPanel2.BorderRadius = 10;
+            this.guna2GradientPanel2.Controls.Add(this.btDetailsNV);
             this.guna2GradientPanel2.Controls.Add(this.btlstEmp);
             this.guna2GradientPanel2.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(130)))), ((int)(((byte)(48)))));
             this.guna2GradientPanel2.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(72)))), ((int)(((byte)(115)))));
@@ -212,6 +214,26 @@
             this.guna2GradientPanel2.TabIndex = 4;
             this.guna2GradientPanel2.MouseLeave += new System.EventHandler(this.guna2GradientPanel2_MouseLeave);
             this.guna2GradientPanel2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.guna2GradientPanel2_MouseMove);
+            // 
+            // btDetailsNV
+            // 
+            this.btDetailsNV.BackColor = System.Drawing.Color.Transparent;
+            this.btDetailsNV.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btDetailsNV.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btDetailsNV.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btDetailsNV.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btDetailsNV.FillColor = System.Drawing.Color.Transparent;
+            this.btDetailsNV.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btDetailsNV.ForeColor = System.Drawing.Color.White;
+            this.btDetailsNV.HoverState.FillColor = System.Drawing.Color.Transparent;
+            this.btDetailsNV.Image = ((System.Drawing.Image)(resources.GetObject("btDetailsNV.Image")));
+            this.btDetailsNV.ImageSize = new System.Drawing.Size(40, 40);
+            this.btDetailsNV.Location = new System.Drawing.Point(14, 114);
+            this.btDetailsNV.Name = "btDetailsNV";
+            this.btDetailsNV.Size = new System.Drawing.Size(138, 82);
+            this.btDetailsNV.TabIndex = 7;
+            this.btDetailsNV.Text = "Chi Tiết Nhân Viên";
+            this.btDetailsNV.Click += new System.EventHandler(this.btDetailsNV_Click);
             // 
             // btlstEmp
             // 
@@ -283,6 +305,7 @@
         private Guna.UI2.WinForms.Guna2TileButton btlstEmp;
         private Guna.UI2.WinForms.Guna2ShadowPanel guna2ShadowPanel1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private Guna.UI2.WinForms.Guna2TileButton btDetailsNV;
     }
 }
 

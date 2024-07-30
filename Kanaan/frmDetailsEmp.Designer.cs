@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDetailsEmp));
             this.UploadImg = new Guna.UI2.WinForms.Guna2PictureBox();
             this.btLoadImg = new Guna.UI2.WinForms.Guna2Button();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
@@ -83,6 +84,8 @@
             this.guna2GroupBox1 = new Guna.UI2.WinForms.Guna2GroupBox();
             this.tbMaNV = new Guna.UI2.WinForms.Guna2TextBox();
             this.title = new DevExpress.XtraEditors.LabelControl();
+            this.btUC = new Guna.UI2.WinForms.Guna2TileButton();
+            this.btBack = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)(this.UploadImg)).BeginInit();
             this.guna2TabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -114,6 +117,7 @@
             this.btLoadImg.Size = new System.Drawing.Size(149, 45);
             this.btLoadImg.TabIndex = 1;
             this.btLoadImg.Text = "Tải ảnh lên";
+            this.btLoadImg.Click += new System.EventHandler(this.btLoadImg_Click);
             // 
             // labelControl1
             // 
@@ -208,6 +212,7 @@
             this.tbTen.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.tbTen.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tbTen.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.tbTen.ForeColor = System.Drawing.Color.Black;
             this.tbTen.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tbTen.Location = new System.Drawing.Point(95, 23);
             this.tbTen.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -244,6 +249,7 @@
             // 
             // dtNgayNhan
             // 
+            this.dtNgayNhan.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtNgayNhan.Location = new System.Drawing.Point(107, 75);
             this.dtNgayNhan.Name = "dtNgayNhan";
             this.dtNgayNhan.Size = new System.Drawing.Size(244, 23);
@@ -251,6 +257,7 @@
             // 
             // dtNgayHetHan
             // 
+            this.dtNgayHetHan.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtNgayHetHan.Location = new System.Drawing.Point(473, 73);
             this.dtNgayHetHan.Name = "dtNgayHetHan";
             this.dtNgayHetHan.Size = new System.Drawing.Size(226, 23);
@@ -258,6 +265,7 @@
             // 
             // dtNgayKy
             // 
+            this.dtNgayKy.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtNgayKy.Location = new System.Drawing.Point(473, 38);
             this.dtNgayKy.Name = "dtNgayKy";
             this.dtNgayKy.Size = new System.Drawing.Size(226, 23);
@@ -266,6 +274,11 @@
             // cbLoaiHD
             // 
             this.cbLoaiHD.FormattingEnabled = true;
+            this.cbLoaiHD.Items.AddRange(new object[] {
+            "THỬ VIỆC",
+            "LẦN 1",
+            "LẦN 2",
+            "CHÍNH THỨC"});
             this.cbLoaiHD.Location = new System.Drawing.Point(107, 40);
             this.cbLoaiHD.Name = "cbLoaiHD";
             this.cbLoaiHD.Size = new System.Drawing.Size(244, 24);
@@ -330,6 +343,7 @@
             this.tbCMND.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.tbCMND.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tbCMND.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.tbCMND.ForeColor = System.Drawing.Color.Black;
             this.tbCMND.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tbCMND.Location = new System.Drawing.Point(60, 111);
             this.tbCMND.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -342,6 +356,7 @@
             // 
             // dtNgayCap
             // 
+            this.dtNgayCap.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtNgayCap.Location = new System.Drawing.Point(321, 111);
             this.dtNgayCap.Name = "dtNgayCap";
             this.dtNgayCap.Size = new System.Drawing.Size(159, 23);
@@ -431,6 +446,7 @@
             this.tbDiaChi.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.tbDiaChi.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tbDiaChi.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.tbDiaChi.ForeColor = System.Drawing.Color.Black;
             this.tbDiaChi.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tbDiaChi.Location = new System.Drawing.Point(60, 182);
             this.tbDiaChi.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -452,6 +468,7 @@
             this.tbSDT.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.tbSDT.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tbSDT.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.tbSDT.ForeColor = System.Drawing.Color.Black;
             this.tbSDT.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tbSDT.Location = new System.Drawing.Point(551, 183);
             this.tbSDT.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -465,6 +482,9 @@
             // cbGioiTinh
             // 
             this.cbGioiTinh.FormattingEnabled = true;
+            this.cbGioiTinh.Items.AddRange(new object[] {
+            "Nam ",
+            "Nữ"});
             this.cbGioiTinh.Location = new System.Drawing.Point(64, 295);
             this.cbGioiTinh.Name = "cbGioiTinh";
             this.cbGioiTinh.Size = new System.Drawing.Size(118, 24);
@@ -529,6 +549,7 @@
             this.tbMaSoThue.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.tbMaSoThue.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tbMaSoThue.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.tbMaSoThue.ForeColor = System.Drawing.Color.Black;
             this.tbMaSoThue.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tbMaSoThue.Location = new System.Drawing.Point(456, 257);
             this.tbMaSoThue.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -550,6 +571,7 @@
             this.tbSoTaiKhoan.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.tbSoTaiKhoan.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tbSoTaiKhoan.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.tbSoTaiKhoan.ForeColor = System.Drawing.Color.Black;
             this.tbSoTaiKhoan.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tbSoTaiKhoan.Location = new System.Drawing.Point(90, 221);
             this.tbSoTaiKhoan.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -571,6 +593,7 @@
             this.tbSoSoBHXH.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.tbSoSoBHXH.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tbSoSoBHXH.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.tbSoSoBHXH.ForeColor = System.Drawing.Color.Black;
             this.tbSoSoBHXH.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tbSoSoBHXH.Location = new System.Drawing.Point(456, 221);
             this.tbSoSoBHXH.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -583,6 +606,7 @@
             // 
             // dtThangBHXH
             // 
+            this.dtThangBHXH.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtThangBHXH.Location = new System.Drawing.Point(148, 259);
             this.dtThangBHXH.Name = "dtThangBHXH";
             this.dtThangBHXH.Size = new System.Drawing.Size(215, 23);
@@ -711,6 +735,7 @@
             this.tbMaNV.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.tbMaNV.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tbMaNV.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.tbMaNV.ForeColor = System.Drawing.Color.Black;
             this.tbMaNV.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tbMaNV.Location = new System.Drawing.Point(95, 56);
             this.tbMaNV.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -728,15 +753,51 @@
             this.title.Location = new System.Drawing.Point(184, 47);
             this.title.Margin = new System.Windows.Forms.Padding(4);
             this.title.Name = "title";
-            this.title.Size = new System.Drawing.Size(69, 37);
+            this.title.Size = new System.Drawing.Size(281, 38);
             this.title.TabIndex = 52;
-            this.title.Text = "Label";
+            this.title.Text = "Thêm Nhân Viên Mới";
+            // 
+            // btUC
+            // 
+            this.btUC.BorderRadius = 10;
+            this.btUC.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btUC.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btUC.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btUC.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btUC.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btUC.ForeColor = System.Drawing.Color.White;
+            this.btUC.Location = new System.Drawing.Point(771, 89);
+            this.btUC.Name = "btUC";
+            this.btUC.Size = new System.Drawing.Size(92, 30);
+            this.btUC.TabIndex = 53;
+            this.btUC.Text = "Thêm";
+            this.btUC.Click += new System.EventHandler(this.btUC_Click);
+            // 
+            // btBack
+            // 
+            this.btBack.BorderRadius = 10;
+            this.btBack.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btBack.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btBack.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btBack.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btBack.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btBack.ForeColor = System.Drawing.Color.White;
+            this.btBack.Image = ((System.Drawing.Image)(resources.GetObject("btBack.Image")));
+            this.btBack.ImageSize = new System.Drawing.Size(15, 15);
+            this.btBack.Location = new System.Drawing.Point(744, 646);
+            this.btBack.Name = "btBack";
+            this.btBack.Size = new System.Drawing.Size(102, 30);
+            this.btBack.TabIndex = 54;
+            this.btBack.Text = "Trở về";
+            this.btBack.Click += new System.EventHandler(this.btBack_Click);
             // 
             // frmDetailsEmp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1012, 690);
+            this.Controls.Add(this.btBack);
+            this.Controls.Add(this.btUC);
             this.Controls.Add(this.title);
             this.Controls.Add(this.guna2TabControl1);
             this.Controls.Add(this.btLoadImg);
@@ -813,5 +874,7 @@
         private Guna.UI2.WinForms.Guna2GroupBox guna2GroupBox1;
         private Guna.UI2.WinForms.Guna2TextBox tbMaNV;
         private DevExpress.XtraEditors.LabelControl title;
+        private Guna.UI2.WinForms.Guna2TileButton btUC;
+        private Guna.UI2.WinForms.Guna2Button btBack;
     }
 }

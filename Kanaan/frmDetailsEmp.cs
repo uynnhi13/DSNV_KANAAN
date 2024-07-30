@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -20,17 +21,37 @@ namespace Kanaan
         public frmDetailsEmp(string status, string MaNV)
         {
             InitializeComponent();
-            CheckChucNang(status,MaNV);
+            LoadThongTin();
+            CheckChucNang(status, MaNV);
+            tbMaNV.Enabled = false;
+        }
+
+        private void LoadThongTin()
+        {
+            DBHelper dBHelper = new DBHelper();
+            DO_Information in4= new DO_Information();
+            string[] dbtable = { "Department_tab", "Jobtitle_tab", "TonGiao", "DiaDiem", "DiaDiem", "DiaDiem","TrinhDoDaiHoc","DanToc" };
+            System.Windows.Forms.ComboBox[] cb = { cbBP, cbCV, cbTonGiao, cbNoiCap,cbNoiSinh, cbNguyenQuan, cbTrinhDo, cbDanToc };
+            for (int i = 0; i < dbtable.Length; i++)
+            {
+                cb[i] = in4.Load_cbb(cb[i], dbtable[i]);
+            }
         }
 
         private void CheckChucNang(string status, string MaNV)
         {
             frmEmployee employee = new frmEmployee();
+            if(MaNV=="" && status == "")
+            {
+                btUC.Enabled = false;
+                btBack.Visible = false;
+            }
             if(status=="EDIT" && MaNV != "")
             {
                 DataTable dt=new DataTable();
                 DO_Employee emp = new DO_Employee();
                 title.Text = "Chỉnh sửa thông tin nhân viên";
+                btUC.Text = "Cập Nhật";
                 dt = emp.GetEmployeeByID(MaNV);
                 if(dt.Rows.Count > 0)
                 {
@@ -74,6 +95,55 @@ namespace Kanaan
                     
                 }
             }
+        }
+
+        private void btUC_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (status == "EDIT")
+                {
+                    ThongTinNV("UpdateEmployeeData");
+                    MessageBox.Show("Cập nhật thành công nhân viên");
+                }
+                else
+                {
+                    ThongTinNV("AddEmployeeData");
+                    MessageBox.Show("Thêm thành công nhân viên");
+                }
+                this.Close();
+            }
+            catch(Exception ex) 
+            {
+                throw;
+            }
+        }
+
+        private void ThongTinNV(string procName)
+        {
+            DBHelper dBHelper = new DBHelper();
+            string[] parameter = {"@Emp_code","@Full_name", "@Birthday", "@Department_id", "@Jobtitle_id",
+                                        "@NgayNhanViec", "@NgayKyHopDong", "@NgayHetHan", "@ThangThamGiaBHXH", "@LoaiHD",
+                                        "@NoiSinh", "@NguyenQuan", "@CMND", "@NgayCap", "@NoiCap", "@DienThoai",
+                                        "@TrinhDo", "@DiaChi", "@GioiTinh", "@DanToc", "@TonGiao", "@MaSoThue",
+                                        "@SoTaiKhoan", "@SoSoBHXH", "@imgURL"};
+            object[] objects = { tbMaNV.Text,tbTen.Text, dtNgaySinh.Value, cbBP.SelectedValue, cbCV.SelectedValue,
+                                    dtNgayNhan.Value, dtNgayKy.Value, dtNgayHetHan.Value, dtThangBHXH.Value, cbLoaiHD.Text,
+                                    cbNoiSinh.Text, cbNguyenQuan.Text, tbCMND.Text, dtNgayCap.Value, cbNoiCap.Text, tbSDT.Text,
+                                    cbTrinhDo.SelectedValue, tbDiaChi.Text, cbGioiTinh.Text, cbDanToc.SelectedValue, cbTonGiao.SelectedValue, tbMaSoThue.Text,
+                                    tbSoTaiKhoan.Text, tbSoSoBHXH.Text,UploadImg.ImageLocation};
+            dBHelper.execStoreProcedure(procName, parameter, objects);
+        }
+
+        private void btLoadImg_Click(object sender, EventArgs e)
+        {
+            string tam=function.UpLoadImgage(UploadImg,tbMaNV.Text);
+            UploadImg.ImageLocation = tam;
+        }
+
+        private void btBack_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

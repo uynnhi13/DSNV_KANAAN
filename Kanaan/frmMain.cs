@@ -21,11 +21,12 @@ namespace Kanaan
             guna2GradientPanel2.Visible = false;
         }
 
+
         private void frmEmployee_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (employee.status == "CREATE")
             {
-                ShowFormDetail("","");
+                ShowFormDetail("CREATE","");
             }
             else if (employee.status == "EDIT" && employee.MaNV!="")
             {
@@ -33,9 +34,20 @@ namespace Kanaan
             }
         }
 
+        private void frmDetails_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            flowLayoutPanel1.Controls.Clear();
+            employee=new frmEmployee();
+            employee.TopLevel = false;
+            flowLayoutPanel1.Controls.Add(employee);
+            employee.Show();
+            employee.FormClosed += frmEmployee_FormClosed;
+        }
+
         private void ShowFormDetail(string status, string MaNV)
         {
             frmDetailsEmp details = new frmDetailsEmp(status,MaNV);
+            details.FormClosed += frmDetails_FormClosed;
             details.status = status;
             details.MaNV = MaNV;
             flowLayoutPanel1.Controls.Clear();
@@ -84,13 +96,23 @@ namespace Kanaan
         private void btlstEmp_Click(object sender, EventArgs e)
         {
             flowLayoutPanel1.Controls.Clear();
-            if (employee.IsDisposed)
-                employee = new frmEmployee();
+            employee=new frmEmployee();
+            //if (employee.IsDisposed)
+            //    employee = new frmEmployee();
 
             employee.FormClosed += frmEmployee_FormClosed;
             employee.TopLevel = false;
             flowLayoutPanel1.Controls.Add(employee);
             employee.Show();
+        }
+
+        private void btDetailsNV_Click(object sender, EventArgs e)
+        {
+            flowLayoutPanel1.Controls.Clear();
+            frmDetailsEmp detaill = new frmDetailsEmp("","");
+            detaill.TopLevel = false;
+            flowLayoutPanel1.Controls.Add(detaill);
+            detaill.Show();
         }
     }
 }

@@ -23,6 +23,7 @@ namespace Kanaan_DataAccess
                 {
                     throw new InvalidOperationException("SqlDataReader không được khởi tạo.");
                 }
+                List<KeyValuePair<int, string>> items = new List<KeyValuePair<int, string>>();
 
                 comboBox.Items.Clear(); // Xóa các mục hiện tại
                 while (reader.Read())
@@ -30,9 +31,10 @@ namespace Kanaan_DataAccess
                     int id = reader.GetInt32(0); // Lấy giá trị ID
                     string name = reader.GetString(1); // Lấy giá trị Name
 
-                    comboBox.Items.Add(new KeyValuePair<int, string>(id, name));
+                    items.Add(new KeyValuePair<int, string>(id, name));
                 }
 
+                comboBox.DataSource= items;
                 comboBox.DisplayMember = "Value";
                 comboBox.ValueMember = "Key";
 

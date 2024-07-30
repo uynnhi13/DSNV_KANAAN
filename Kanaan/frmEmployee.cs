@@ -31,6 +31,14 @@ namespace Kanaan
             btCreate.Enabled = !b;
         }
 
+        private void Reset()
+        {
+            tbMaNV.Text = "";
+            tbTen.Text = "";
+            cbBP.Text = "";
+            cbCV.Text = "";
+        }
+
         public async void LoadThongTin()
         {
             dBHelper = new DBHelper();
@@ -48,6 +56,8 @@ namespace Kanaan
             {
                 gridControl1.DataSource = null;
             }
+
+            Reset();
         }
 
         private void gridView_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
@@ -87,6 +97,22 @@ namespace Kanaan
             status = "EDIT";
             MaNV=tbMaNV.Text;
             this.Close();
+        }
+
+        private void btDel_Click(object sender, EventArgs e)
+        {
+            DialogResult dgl = MessageBox.Show("Xác nhận xóa nhân viên có mã " + tbMaNV.Text,"Cảnh báo",MessageBoxButtons.YesNo);
+            if(dgl == DialogResult.Yes)
+            {
+                dBHelper.execStoreProcedure("XoaNhanVienVaTaiKhoan", new string[] { "@Emp_code" }, new object[] { tbMaNV.Text });
+                MessageBox.Show("Xóa thành công nhân viên có mã " + tbMaNV.Text);
+            }
+            LoadThongTin();
+        }
+
+        private void btRefresh_Click(object sender, EventArgs e)
+        {
+            Reset();
         }
     }
 }

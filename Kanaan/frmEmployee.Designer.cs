@@ -42,7 +42,7 @@
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.guna2ImageButton1 = new Guna.UI2.WinForms.Guna2ImageButton();
             this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
-            this.btSave = new Guna.UI2.WinForms.Guna2TileButton();
+            this.btRefresh = new Guna.UI2.WinForms.Guna2TileButton();
             this.btEdit = new Guna.UI2.WinForms.Guna2TileButton();
             this.btDel = new Guna.UI2.WinForms.Guna2TileButton();
             this.btCreate = new Guna.UI2.WinForms.Guna2TileButton();
@@ -267,27 +267,28 @@
             this.labelControl5.TabIndex = 4;
             this.labelControl5.Text = "Danh Sách Nhân Viên";
             // 
-            // btSave
+            // btRefresh
             // 
-            this.btSave.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btSave.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btSave.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btSave.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btSave.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btSave.FillColor = System.Drawing.SystemColors.Control;
-            this.btSave.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.btSave.ForeColor = System.Drawing.Color.Black;
-            this.btSave.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(102)))));
-            this.btSave.HoverState.ForeColor = System.Drawing.Color.White;
-            this.btSave.HoverState.Image = ((System.Drawing.Image)(resources.GetObject("resource.Image")));
-            this.btSave.Image = ((System.Drawing.Image)(resources.GetObject("btSave.Image")));
-            this.btSave.ImageSize = new System.Drawing.Size(30, 30);
-            this.btSave.Location = new System.Drawing.Point(1, 0);
-            this.btSave.Margin = new System.Windows.Forms.Padding(4);
-            this.btSave.Name = "btSave";
-            this.btSave.Size = new System.Drawing.Size(113, 87);
-            this.btSave.TabIndex = 5;
-            this.btSave.Text = "Lưu";
+            this.btRefresh.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btRefresh.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btRefresh.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btRefresh.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btRefresh.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btRefresh.FillColor = System.Drawing.SystemColors.Control;
+            this.btRefresh.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btRefresh.ForeColor = System.Drawing.Color.Black;
+            this.btRefresh.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(102)))));
+            this.btRefresh.HoverState.ForeColor = System.Drawing.Color.White;
+            this.btRefresh.HoverState.Image = ((System.Drawing.Image)(resources.GetObject("resource.Image")));
+            this.btRefresh.Image = ((System.Drawing.Image)(resources.GetObject("btRefresh.Image")));
+            this.btRefresh.ImageSize = new System.Drawing.Size(35, 35);
+            this.btRefresh.Location = new System.Drawing.Point(1, 0);
+            this.btRefresh.Margin = new System.Windows.Forms.Padding(4);
+            this.btRefresh.Name = "btRefresh";
+            this.btRefresh.Size = new System.Drawing.Size(113, 87);
+            this.btRefresh.TabIndex = 5;
+            this.btRefresh.Text = "Làm mới";
+            this.btRefresh.Click += new System.EventHandler(this.btRefresh_Click);
             // 
             // btEdit
             // 
@@ -333,6 +334,7 @@
             this.btDel.Size = new System.Drawing.Size(113, 87);
             this.btDel.TabIndex = 7;
             this.btDel.Text = "Xóa";
+            this.btDel.Click += new System.EventHandler(this.btDel_Click);
             // 
             // btCreate
             // 
@@ -365,7 +367,7 @@
             this.Controls.Add(this.btCreate);
             this.Controls.Add(this.btDel);
             this.Controls.Add(this.btEdit);
-            this.Controls.Add(this.btSave);
+            this.Controls.Add(this.btRefresh);
             this.Controls.Add(this.labelControl5);
             this.Controls.Add(this.guna2ImageButton1);
             this.Controls.Add(this.gridControl1);
@@ -399,7 +401,7 @@
         private DevExpress.XtraEditors.LabelControl labelControl5;
         private System.Windows.Forms.ComboBox cbBP;
         private System.Windows.Forms.ComboBox cbCV;
-        private Guna.UI2.WinForms.Guna2TileButton btSave;
+        private Guna.UI2.WinForms.Guna2TileButton btRefresh;
         private Guna.UI2.WinForms.Guna2TileButton btEdit;
         private Guna.UI2.WinForms.Guna2TileButton btDel;
         private Guna.UI2.WinForms.Guna2TileButton btCreate;
