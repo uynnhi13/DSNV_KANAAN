@@ -23,7 +23,7 @@ namespace Kanaan
         private void btSend_Click(object sender, EventArgs e)
         {
             string from = "nle142103@gmail.com";
-            string pass = "tlpkzluvjgyeqsbz";
+            string pass = "";
             string to,content;
 
             to=tbTaiKhoan.Text;
