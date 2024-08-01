@@ -56,30 +56,6 @@ namespace Kanaan_DataAccess
             return thuchien.ExecuteReader();
         }
 
-        public SqlDataReader ExcuteReader(string procName,params SqlParameter[] procParams)
-        {
-            SqlDataReader reader = null;
-            try
-            {
-                thuchien=new SqlCommand(procName, ketnoi);
-                thuchien.CommandType = CommandType.StoredProcedure;
-                if(procParams != null)
-                {
-                    for(int i=0; i < procParams.Length; i++)
-                    {
-                        thuchien.Parameters.Add(procParams[i]);
-                    }
-                }
-                docdulieu=thuchien.ExecuteReader(CommandBehavior.CloseConnection);
-            }
-            catch
-            {
-                throw;
-            }
-            return reader;
-
-        }
-
         public SqlDataReader ExcuteReaderSQL(string nameDB)
         {
             SqlDataReader reader = null;
@@ -202,6 +178,30 @@ namespace Kanaan_DataAccess
                 CloseConnection();
             }
             return dt;
+        }
+
+        public object ExcuteReader(string procName, String[] procParams, object[] value)
+        {
+            object result;
+            try
+            {
+                thuchien = new SqlCommand(procName, ketnoi);
+                thuchien.CommandType = CommandType.StoredProcedure;
+                if (procParams != null)
+                {
+                    for (int i = 0; i < procParams.Length; i++)
+                    {
+                        thuchien.Parameters.AddWithValue(procParams[i], value[i]);
+                    }
+                }
+                result=thuchien.ExecuteScalar();
+            }
+            catch
+            {
+                throw;
+            }
+            return result;
+
         }
     }
 }

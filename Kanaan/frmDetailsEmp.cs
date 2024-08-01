@@ -145,5 +145,10 @@ namespace Kanaan
         {
             this.Close();
         }
+
+        private void frmDetailsEmp_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

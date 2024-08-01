@@ -806,6 +806,7 @@
             this.FormBorderEffect = DevExpress.XtraEditors.FormBorderEffect.None;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmDetailsEmp";
+            this.Load += new System.EventHandler(this.frmDetailsEmp_Load);
             ((System.ComponentModel.ISupportInitialize)(this.UploadImg)).EndInit();
             this.guna2TabControl1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);

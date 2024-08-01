@@ -117,29 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btBack.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wQAADsEBuJFr7QAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAP4SURBVHhe5ZtL
-        bE1BGMdbzzaiSKgiJKUa0VXrufBeCu1GLLqwEAkhSGphIRKssCoLiSBBWNAQtZAQC5EgUuKdiFRCovGI
-        SERp6lW/b87X6O3tufc85r7m/pLfoj0z35n/qHPuzDm3JB/o6+sbhtX6Y3FB8Fp8gEKz/ro4IPAG/Gai
-        e+zXQ25D0Ao8ZyIn4v4EEHIhdpq4ybg7AYQrxZ34U5L64OYEEGwyXjcRU+PeBBCqCT+beOlxZwIIU4ZH
-        8K8kC4gbE0CQufjERApH4U8AIeTe/t3ECU/hTgCDH48XTIzoFOYEMPCV+M5EiEdhTQADHoH78LeM3gKF
-        MwEMdibeM8O2x1GciuP0NPkJA2zGr5hJfuALbEf5K1uLFTqE3MAAxuJpzBW/8DbKR+oqHVZ24ITz8RXm
-        C3LduYzLdIiZgRP0L2J6MV+5i8t1yPagaCVekzMUCBexUocfDwqtxo9StcCQhVejxggPnUdjK4ZZxOQb
-        MvbDOExjBYMOc/ARusIlLNd4qaGhLGK6pZdj3MAyjZkMB2UR0yYtHeYKDv3fgQPPTBP3OaSRE+FAh3e8
-        KGjS2P/hl/Lx9ow57D5yW5+k0RPhwDr8Iq0c56RGToaD1SgfK13mD9Zr5GQ4aHuTIx9p07j+0GgpvjXN
-        3UP+cWdpVH9oJA8xz0sPBwm+/UbjjTjwMbYLdGq8YNDBxQvkbI0XDDqMQlllyZXUBbZotHDQcRXaeA6Q
-        a45rpPDQeSJeNWXsIX9dsi0uy/IluBmP4UPMxP7EHY0TDQrIfuE2lC1sG/hemTk2A3egbJXb4o2WjweF
-        6vCpKRmPtLcm2sgrdfLOgY2Nm24tGx+KyfsABzHOBTLwvZm28ol1N/ZIx4j0ajl7UHQNfjLlwxP62SB9
-        FmDUzdseLWMXCk/BIO8EDSb0BAj0q8EoH9u7tIR9KC4XyF0Y5oFKpAkQ6FuPYS/GHdo9c3CSBnxpTpee
-        yBMg0H+TVyYwZ7VrZuFEY/CEOWVq4k6A3CEem0rBaNGu2YETptt1ijUBAjUavVKBaNBu2YOTTsdb5vTJ
-        2JiAkRhka+89lmq37MKJh+MelOf9A4k9AQJ1grys1arNcweDWIyvzXA8bE3AAa9cSvz3BbMJA5FdJ9mW
-        lw0XK8/4qbMVU3FTm7oJAVu8nL6s0KZuQkBZVvvRrs3chZB+dxl5hbdGm7kJASeg3wpxuzZzFwnpZU1C
-        dq9yc9/PFgQsx6FWhbIWye+3T21AyL0mbiJd6P6XMgm5CAcvvT9gnTZxF0JW4eA/ffm5Vpu4CyFle/65
-        JB7AfZymTdyGoIMf151C/7fCXIKgsu3W/y1UWQKv10PFA6HlHad5GOG7BCUl/wD1y7kcfA3JLgAAAABJ
-        RU5ErkJggg==
-</value>
-  </data>
 </root>
