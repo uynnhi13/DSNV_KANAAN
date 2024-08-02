@@ -66,11 +66,6 @@ namespace Kanaan
             ButtonHover(guna2GradientPanel2, btNhanSu);
         }
 
-        private void frmMain_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void guna2GradientPanel2_MouseMove(object sender, MouseEventArgs e)
         {
             if(guna2GradientPanel2.Visible)
@@ -113,6 +108,13 @@ namespace Kanaan
             detaill.TopLevel = false;
             flowLayoutPanel1.Controls.Add(detaill);
             detaill.Show();
+        }
+
+        private void btLogOut_Click(object sender, EventArgs e)
+        {
+            frmLogin login=new frmLogin();
+            this.Hide();
+            login.ShowDialog();
         }
     }
 }

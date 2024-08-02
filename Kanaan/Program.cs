@@ -16,7 +16,7 @@ namespace Kanaan
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmSendMailFPW());
+            Application.Run(new frmMain());
         }
     }
 }

@@ -201,7 +201,6 @@ namespace Kanaan_DataAccess
                 throw;
             }
             return result;
-
         }
     }
 }

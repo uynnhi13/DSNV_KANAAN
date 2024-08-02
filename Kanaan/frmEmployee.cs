@@ -113,6 +113,7 @@ namespace Kanaan
         private void btRefresh_Click(object sender, EventArgs e)
         {
             Reset();
+            SetButton(false);
         }
     }
 }

@@ -45,13 +45,27 @@ namespace Kanaan
             int roleIndex = -1;
             DBHelper.GetConnection();
             object result=DBHelper.ExcuteReader("KiemTraTaiKhoan",new string[] {"tendangnhap","matkhau"},new object[] {tbTaiKhoan.Text,tbMatKhau.Text});
+            DBHelper.CloseConnection();
             roleIndex=Convert.ToInt32(result);
             return roleIndex;
+        }
+
+        private void hylinkForgot_OpenLink(object sender, DevExpress.XtraEditors.Controls.OpenLinkEventArgs e)
+        {
+            this.Hide();
+            frmSendMailFPW fpw=new frmSendMailFPW();
+            fpw.ShowDialog();
+            this.Show();
         }
 
         private void guna2PictureBox1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
